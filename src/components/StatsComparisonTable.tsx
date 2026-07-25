@@ -1,11 +1,11 @@
 import type { GeneralStats } from "../Types.ts";
+import {HAALAND_COLOR, MBAPPE_COLOR, HAALAND_NAME, MBAPPE_NAME, NOT_LEADING_COLOR} from "../utils/Constants.ts"
 
 interface Props {
     title: string;
     firstPlayer: GeneralStats;
     secondPlayer: GeneralStats;
-    firstName: string;
-    secondName: string;
+    compact?: boolean;
 }
 
 interface StatField {
@@ -14,11 +14,10 @@ interface StatField {
     higherIsBetter: boolean;
 }
 
-// Row order per your spec: name row → apps/assists/goals row → minutes → minutes/goal → minutes/contribution
 const QUICK_STATS: StatField[] = [
     { key: "apps", label: "Appearances", higherIsBetter: true },
-    { key: "assists", label: "Assists", higherIsBetter: true },
     { key: "goals", label: "Goals", higherIsBetter: true },
+    { key: "assists", label: "Assists", higherIsBetter: true },
 ];
 
 const DETAIL_STATS: StatField[] = [
@@ -37,56 +36,86 @@ function getLeader(first: number | null, second: number | null, higherIsBetter: 
     return (higherIsBetter ? first > second : first < second) ? "first" : "second";
 }
 
-export default function StatsComparisonTable({title, firstPlayer, secondPlayer, firstName, secondName,}: Props) {
+function hexToRgba(hex: string, alpha: number): string {
+    const clean = hex.replace("#", "");
+    const r = parseInt(clean.substring(0, 2), 16);
+    const g = parseInt(clean.substring(2, 4), 16);
+    const b = parseInt(clean.substring(4, 6), 16);
+    return `rgba(${r}, ${g}, ${b}, ${alpha})`;
+}
+
+export default function StatsComparisonTable({title, firstPlayer, secondPlayer, compact = false}: Props) {
+    const sides = [
+        { name: MBAPPE_NAME, stats: firstPlayer, other: secondPlayer, color: MBAPPE_COLOR },
+        { name: HAALAND_NAME, stats: secondPlayer, other: firstPlayer, color: HAALAND_COLOR },
+    ];
+
     return (
-        <div className="mx-auto w-full md:w-3/5 rounded-2xl border border-gray-100 bg-white shadow-lg shadow-gray-900/5">
-            <h2 className="border-b border-gray-100 p-6 text-center text-xl font-bold text-gray-900">
+        <div
+            className={`rounded-4xl border border-gray-900 bg-white ${
+                compact ? "w-full shadow-sm" : "mx-auto w-full md:w-3/5 shadow-lg shadow-gray-900/5"
+            }`}
+        >
+            <h2
+                className={`border-b border-gray-100 text-center font-bold text-gray-900 ${
+                    compact ? "p-4 text-base" : "p-6 text-xl"
+                }`}
+            >
                 {title}
             </h2>
 
-            {/* Names row */}
-            <div className="flex items-center justify-center gap-4 px-6 py-5 sm:gap-8">
-                <span className="flex-1 text-right text-lg font-bold text-gray-900 sm:text-xl">
-                    {firstName}
-                </span>
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-emerald-600 text-xs font-bold text-white">
-                    VS
-                </span>
-                <span className="flex-1 text-left text-lg font-bold text-gray-900 sm:text-xl">
-                    {secondName}
-                </span>
-            </div>
-
-            {/* apps / assists / goals */}
-            <div className="grid grid-cols-3 gap-3 border-t border-gray-100 bg-gray-50/60 p-4 sm:gap-4 sm:p-6">
-                {QUICK_STATS.map(field => {
-                    const firstValue = firstPlayer[field.key];
-                    const secondValue = secondPlayer[field.key];
-                    const leader = getLeader(firstValue, secondValue, field.higherIsBetter);
-
-                    return (
-                        <div
-                            key={field.key}
-                            className="rounded-xl bg-white p-3 text-center shadow-sm ring-1 ring-gray-900/5 transition-shadow hover:shadow-md sm:p-4"
+            {/* apps / goals / assists — one side per player */}
+            <div className={`grid grid-cols-2 border-t border-gray-100 ${compact ? "gap-2 p-3" : "gap-3 p-4 sm:gap-4 sm:p-6"}`}>
+                {sides.map(side => (
+                    <div
+                        key={side.name}
+                        className={`rounded-xl ${compact ? "p-2" : "p-3 sm:p-4"}`}
+                        style={{
+                            backgroundColor: hexToRgba(side.color, 0.06),
+                            borderTop: `3px solid ${side.color}`,
+                        }}
+                    >
+                        <p
+                            className={`mb-2 truncate font-bold ${compact ? "text-[10px]" : "text-xs sm:text-sm"}`}
+                            style={{ color: side.color }}
                         >
-                            <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400 sm:text-xs">
-                                {field.label}
-                            </p>
-                            <div className="mt-2 flex items-center justify-center gap-2 sm:gap-3">
-                                <span className={`text-lg font-bold sm:text-2xl ${leader === "first" ? "text-emerald-600" : "text-gray-800"}`}>
-                                    {formatValue(firstValue)}
-                                </span>
-                                <span className="text-gray-300">·</span>
-                                <span className={`text-lg font-bold sm:text-2xl ${leader === "second" ? "text-emerald-600" : "text-gray-800"}`}>
-                                    {formatValue(secondValue)}
-                                </span>
-                            </div>
+                            {side.name}
+                        </p>
+                        <div className={compact ? "space-y-1" : "space-y-2"}>
+                            {QUICK_STATS.map(field => {
+                                const value = side.stats[field.key];
+                                const otherValue = side.other[field.key];
+                                const leads = value !== null && otherValue !== null && value > otherValue;
+
+                                return (
+                                    <div key={field.key} className="flex items-center justify-between gap-2">
+                                    <span className={`font-medium uppercase tracking-wide text-gray-400 
+                                    ${compact ? "text-[9px]" : "text-[11px] sm:text-xs"}`}>
+                                        {field.label}
+                                    </span>
+                                        <span
+                                            className={`font-bold transition-all duration-300 ${compact ? "text-sm" : "text-base sm:text-lg"}`}
+                                            style={
+                                                leads
+                                                    ? {
+                                                        color: side.color,
+                                                        textShadow: `0 0 25px ${hexToRgba(side.color, 0.6)}, 0 0 2px 
+                                                        ${hexToRgba(side.color, 0.4)}`,
+                                                    }
+                                                    : {color: NOT_LEADING_COLOR}
+                                            }
+                                        >
+                                            {formatValue(value)}
+                                        </span>
+                                    </div>
+                                );
+                            })}
                         </div>
-                    );
-                })}
+                    </div>
+                ))}
             </div>
 
-            {/* minutes / minutes-per-goal / minutes-per-contribution */}
+            {/* minutes / minutes-per-goal / minutes-per-contribution — unchanged */}
             <div className="divide-y divide-gray-100 border-t border-gray-100">
                 {DETAIL_STATS.map(field => {
                     const firstValue = firstPlayer[field.key];
@@ -95,32 +124,34 @@ export default function StatsComparisonTable({title, firstPlayer, secondPlayer, 
 
                     const total = (firstValue ?? 0) + (secondValue ?? 0);
                     const firstShare =
-                        firstValue !== null && secondValue !== null && total > 0
-                            ? (firstValue / total) * 100
-                            : 50;
+                        firstValue !== null && secondValue !== null && total > 0 ? (firstValue / total) * 100 : 50;
 
                     return (
-                        <div key={field.key} className="px-6 py-4 sm:px-8 sm:py-5">
-                            <div className="flex items-center justify-between gap-4">
-                                <span className={`w-16 text-right text-base font-semibold sm:w-24 sm:text-lg ${leader === "first" ? "text-emerald-600" : "text-gray-800"}`}>
+                        <div key={field.key} className={compact ? "px-4 py-2.5" : "px-6 py-4 sm:px-8 sm:py-5"}>
+                            <div className="flex items-center justify-between gap-3">
+                                <span
+                                    className={`text-right font-semibold ${compact ? "w-12 text-sm" : "w-16 text-base sm:w-24 sm:text-lg"}`}
+                                    style={{ color: leader === "first" ? MBAPPE_COLOR : NOT_LEADING_COLOR }}
+                                >
                                     {formatValue(firstValue)}
                                 </span>
-                                <span className="text-xs font-semibold uppercase tracking-wide text-gray-400 sm:text-sm">
+                                <span className={`font-semibold uppercase tracking-wide text-gray-400 ${compact ? "text-[10px]" : "text-xs sm:text-sm"}`}>
                                     {field.label}
                                 </span>
-                                <span className={`w-16 text-left text-base font-semibold sm:w-24 sm:text-lg ${leader === "second" ? "text-emerald-600" : "text-gray-800"}`}>
+                                <span
+                                    className={`text-left font-semibold ${compact ? "w-12 text-sm" : "w-16 text-base sm:w-24 sm:text-lg"}`}
+                                    style={{ color: leader === "second" ? HAALAND_COLOR : NOT_LEADING_COLOR }}
+                                >
                                     {formatValue(secondValue)}
                                 </span>
                             </div>
 
-                            {/* Proportional bar only for "more is more" stats like minutes —
-                                for the two per-goal efficiency stats, a longer bar would
-                                visually read as "bigger = better" even though lower is better
-                                there, so we skip the bar and let the color do the talking. */}
                             {field.higherIsBetter && (
-                                <div className="mt-2 flex h-1.5 overflow-hidden rounded-full bg-gray-100">
-                                    <div className="bg-emerald-500 transition-all duration-500" style={{ width: `${firstShare}%` }} />
-                                    <div className="bg-gray-300 transition-all duration-500" style={{ width: `${100 - firstShare}%` }} />
+                                <div className={`flex overflow-hidden rounded-full bg-gray-100 ${compact ? "mt-1.5 h-1" : "mt-2 h-1.5"}`}>
+                                    <div className="transition-all duration-500"
+                                         style={{ width: `${firstShare}%`, backgroundColor: MBAPPE_COLOR }} />
+                                    <div className="bg-gray-300 transition-all duration-500"
+                                         style={{ width: `${100 - firstShare}%`, backgroundColor: HAALAND_COLOR }} />
                                 </div>
                             )}
                         </div>

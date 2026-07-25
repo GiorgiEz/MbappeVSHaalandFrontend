@@ -68,10 +68,7 @@ export interface ClubSeasonStats {
 
 export type ClubSeasonJson = Record<
     string,
-    Record<
-        string,
-        Record<string, ClubSeasonStats>
-    >
+    Record<string, Record<string, ClubSeasonStats>>
 >;
 
 export type CountryCompetitionJson = Record<
@@ -126,12 +123,3 @@ export type CompetitionTier =
     | "International Tournament"
     | "International Qualifying"
     | "Friendly";
-
-export const EMPTY_STATS: GeneralStats = {
-    apps: 0,
-    goals: 0,
-    assists: 0,
-    minutes: 0,
-    minutes_per_goal: null,
-    minutes_per_goal_contribution: null,
-};

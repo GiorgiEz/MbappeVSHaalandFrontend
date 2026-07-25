@@ -18,7 +18,7 @@ export default function AllTimeStats() {
             <Route path="opponents" element={<FavouriteOpponentStats />}/>
 
             {/* default page */}
-            <Route index element={<Navigate to="career" replace/>}/>
+            <Route index element={<Navigate to="all-time/career" replace/>}/>
         </Routes>
     );
 }

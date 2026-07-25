@@ -14,10 +14,11 @@ function App() {
             <Header />
             <main className="max-w-7xl mx-auto px-6 py-8">
                 <Routes>
-                    <Route path="/stats/all-time/*" element={<AllTimeStats />}/>
-                    <Route path="/stats/club/*" element={<ClubStats />}/>
-                    <Route path="/stats/country/*" element={<CountryStats />}/>
-                    <Route path="/stats/honours" element={<Honours />}/>
+                    <Route path="*" element={<AllTimeStats />}/>
+                    <Route path="/all-time/*" element={<AllTimeStats />}/>
+                    <Route path="/club/*" element={<ClubStats />}/>
+                    <Route path="/country/*" element={<CountryStats />}/>
+                    <Route path="/honours" element={<Honours />}/>
                 </Routes>
             </main>
         </BrowserRouter>
