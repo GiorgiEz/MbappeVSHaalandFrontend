@@ -12,6 +12,13 @@ function App() {
     return (
         <BrowserRouter>
             <Header />
+            <div className="flex justify-center">
+                <img
+                    src="/photos/mbappe-vs-haaland-main.png"
+                    alt="Mbappe vs Haaland"
+                    className="w-3/8 m-2"
+                />
+            </div>
             <main className="max-w-7xl mx-auto px-6 py-8">
                 <Routes>
                     <Route path="*" element={<AllTimeStats />}/>
