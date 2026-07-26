@@ -1,10 +1,29 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-export default function App() {
-  return (
-      <main className="flex min-h-screen items-center justify-center bg-slate-100">
-        <h1 className="text-5xl font-bold text-yellow-600">
-          Mbappe VS Haaland
-        </h1>
-      </main>
-  );
+import Header from "./components/Header.tsx";
+
+import AllTimeStats from "./pages/all_time_stats/AllTimeStats";
+import {ClubStats} from "./pages/club_stats/ClubStats";
+import {CountryStats} from "./pages/country_stats/CountryStats";
+import {Honours} from "./pages/honours/Honours.tsx";
+
+
+function App() {
+    return (
+        <BrowserRouter>
+            <Header />
+            <main className="max-w-7xl mx-auto px-6 py-8">
+                <Routes>
+                    <Route path="*" element={<AllTimeStats />}/>
+                    <Route path="/all-time/*" element={<AllTimeStats />}/>
+                    <Route path="/club/*" element={<ClubStats />}/>
+                    <Route path="/country/*" element={<CountryStats />}/>
+                    <Route path="/honours/*" element={<Honours />}/>
+                </Routes>
+            </main>
+        </BrowserRouter>
+    );
 }
+
+
+export default App;
