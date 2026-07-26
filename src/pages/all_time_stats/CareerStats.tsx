@@ -1,7 +1,7 @@
 import { useJsonStats } from "../../hooks/useJsonStats";
 import StatsComparisonTable from "../../components/StatsComparisonTable";
 import { JSON_URLS } from "../../api/jsonUrls";
-import type { CareerJson, CareerStats } from "../../Types.ts";
+import type {CareerJson} from "../../utils/Types.ts";
 import {EMPTY_STATS, MBAPPE_NAME, HAALAND_NAME} from "../../utils/Constants.ts"
 
 
@@ -22,10 +22,10 @@ export default function CareerStats() {
         <div className="space-y-8">
             <h1 className="text-4xl font-bold text-center">Career Comparison</h1>
 
-            {careerGroups.map(group => (
+            {careerGroups.map((group) => (
                 <StatsComparisonTable
                     key={group}
-                    title={group.toUpperCase()}
+                    title={group.charAt(0).toUpperCase() + group.slice(1).toLowerCase()}
                     firstPlayer={mbappe[group] ?? EMPTY_STATS}
                     secondPlayer={haaland[group] ?? EMPTY_STATS}
                 />

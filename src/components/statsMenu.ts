@@ -57,12 +57,12 @@ export const STATS_MENU = [
         items: [
             {
                 name: "Competitions",
-                path: "/country/competitions",
+                path: "/country/by-competition",
                 json: JSON_URLS.country.byCompetition
             },
             {
                 name: "By Year",
-                path: "/country/year",
+                path: "/country/by-year",
                 json: JSON_URLS.country.byYear
             }
         ]

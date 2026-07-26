@@ -2,7 +2,7 @@ import { useJsonStats } from "../../hooks/useJsonStats.ts";
 import { JSON_URLS } from "../../api/jsonUrls.ts";
 import { EMPTY_STATS, HAALAND_NAME, MBAPPE_NAME } from "../../utils/Constants.ts";
 import StatsComparisonTable from "../../components/StatsComparisonTable.tsx";
-import type { FinalsJson } from "../../Types.ts";
+import type {FinalsJson} from "../../utils/Types.ts";
 
 
 export default function FinalsStats() {
@@ -35,8 +35,8 @@ export default function FinalsStats() {
                     <div key={name}>
                         <StatsComparisonTable
                             title={name}
-                            firstPlayer={mbappe.competitions[name]?.stats ?? EMPTY_STATS}
-                            secondPlayer={haaland.competitions[name]?.stats ?? EMPTY_STATS}
+                            firstPlayer={mbappe.competitions[name] ?? EMPTY_STATS}
+                            secondPlayer={haaland.competitions[name] ?? EMPTY_STATS}
                         />
                     </div>
                 ))}

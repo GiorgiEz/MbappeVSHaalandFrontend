@@ -2,7 +2,8 @@ import { useJsonStats } from "../../hooks/useJsonStats.ts";
 import { JSON_URLS } from "../../api/jsonUrls.ts";
 import { HAALAND_NAME, MBAPPE_NAME, MBAPPE_COLOR, HAALAND_COLOR } from "../../utils/Constants.ts";
 import OpponentLeaderboard from "../../components/OpponentLeaderboard.tsx";
-import type { FavouriteOpponentsJson } from "../../Types.ts";
+import type { FavouriteOpponentsJson, FavouriteOpponent } from "../../utils/Types.ts";
+
 
 export default function FavouriteOpponentStats() {
     const { data, isLoading, error } = useJsonStats<FavouriteOpponentsJson>(
@@ -12,8 +13,8 @@ export default function FavouriteOpponentStats() {
     if (isLoading) return <p>Loading statistics...</p>;
     if (error || !data) return <p>Failed to load statistics.</p>;
 
-    const mbappe = data[MBAPPE_NAME];
-    const haaland = data[HAALAND_NAME];
+    const mbappe: FavouriteOpponent[] = data[MBAPPE_NAME];
+    const haaland: FavouriteOpponent[] = data[HAALAND_NAME];
 
     if (!mbappe || !haaland) return <p>Player data not found.</p>;
 

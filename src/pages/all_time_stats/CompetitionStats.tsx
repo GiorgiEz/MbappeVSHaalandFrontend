@@ -1,7 +1,7 @@
 import { useJsonStats } from "../../hooks/useJsonStats.ts";
 import { JSON_URLS } from "../../api/jsonUrls.ts";
 import StatsComparisonTable from "../../components/StatsComparisonTable.tsx";
-import type { CompetitionJson } from "../../Types.ts";
+import type { CompetitionJson } from "../../utils/Types.ts";
 import {EMPTY_STATS, MBAPPE_NAME, HAALAND_NAME} from "../../utils/Constants.ts"
 
 
@@ -28,8 +28,8 @@ export default function CompetitionStats() {
                 <StatsComparisonTable
                     key={group}
                     title={group}
-                    firstPlayer={mbappe[group]?.total ?? EMPTY_STATS}
-                    secondPlayer={haaland[group]?.total ?? EMPTY_STATS}
+                    firstPlayer={mbappe[group]?.overall ?? EMPTY_STATS}
+                    secondPlayer={haaland[group]?.overall ?? EMPTY_STATS}
                 />
             ))}
         </div>

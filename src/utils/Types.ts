@@ -73,18 +73,3 @@ export interface PlayerHonours {
 export interface Honours {
     players: PlayerHonours[];
 }
-
-
-export type Player = "Kylian Mbappé" | "Erling Haaland";
-export type TeamType = "club" | "country";
-export type Result = "W" | "D" | "L";
-export type CompetitionTier =
-    | "Domestic League"
-    | "Domestic Cup"
-    | "Domestic Super Cup"
-    | "Continental Club Cup"
-    | "Club World Cup"
-    | "Intercontinental Super Cup"
-    | "International Tournament"
-    | "International Qualifying"
-    | "Friendly";
