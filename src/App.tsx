@@ -5,7 +5,7 @@ import Header from "./components/Header.tsx";
 import AllTimeStats from "./pages/all_time_stats/AllTimeStats";
 import {ClubStats} from "./pages/club_stats/ClubStats";
 import {CountryStats} from "./pages/country_stats/CountryStats";
-import {Honours} from "./pages/Honours";
+import {Honours} from "./pages/honours/Honours.tsx";
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
                     <Route path="/all-time/*" element={<AllTimeStats />}/>
                     <Route path="/club/*" element={<ClubStats />}/>
                     <Route path="/country/*" element={<CountryStats />}/>
-                    <Route path="/honours" element={<Honours />}/>
+                    <Route path="/honours/*" element={<Honours />}/>
                 </Routes>
             </main>
         </BrowserRouter>

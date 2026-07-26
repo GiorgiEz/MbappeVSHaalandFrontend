@@ -71,6 +71,17 @@ export const STATS_MENU = [
     {
         title: "Honours",
 
-        items: []
+        items: [
+            {
+                name: "Individual Awards",
+                path: "/honours/individual-awards",
+                json: JSON_URLS.honours
+            },
+            {
+                name: "Team Trophies",
+                path: "/honours/team-trophies",
+                json: JSON_URLS.honours
+            }
+        ]
     }
 ];
