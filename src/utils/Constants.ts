@@ -14,4 +14,4 @@ export const HAALAND_NAME = "Erling Haaland";
 
 export const MBAPPE_COLOR = "#1D4ED8"; // royal blue — France & Real Madrid
 export const HAALAND_COLOR = "#D97706"; // amber/gold — his Dortmund breakout years
-export const NOT_LEADING_COLOR = "#c7bcbc"
+export const NOT_LEADING_COLOR = "#c7bcbc" // gray

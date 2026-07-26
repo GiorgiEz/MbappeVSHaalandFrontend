@@ -7,27 +7,14 @@ export interface GeneralStats {
     minutes_per_goal_contribution: number | null;
 }
 
-export interface CareerStats {
-    career: GeneralStats;
-    club: GeneralStats;
-    country: GeneralStats;
+export interface OverallCompetitionStats {
+    overall: GeneralStats;
+    competitions: CompetitionStats;
 }
-
-export type CareerJson = Record<string, CareerStats>;
 
 export interface CompetitionStats {
     [competition: string]: GeneralStats;
 }
-
-export interface OverallCompetitionStats {
-    total: GeneralStats;
-    competitions: CompetitionStats;
-}
-
-export type CompetitionJson = Record<
-    string,
-    Record<string, OverallCompetitionStats>
->;
 
 export interface FavouriteOpponent {
     opponent: string;
@@ -36,55 +23,42 @@ export interface FavouriteOpponent {
     assists: number;
 }
 
-export type FavouriteOpponentsJson = Record<
-    string,
-    FavouriteOpponent[]
->;
+/* ===== ALL TIME STATS ===== */
+// All Time Career
+export type CareerJson = Record<string, Record<string, GeneralStats>>;
 
-export interface FinalsStats {
-    overall: GeneralStats;
-    competitions: CompetitionStats;
-}
+// All Time By Competition
+export type CompetitionJson = Record<string, Record<string, OverallCompetitionStats>>;
 
-export type FinalsJson = Record<
-    string,
-    FinalsStats
->;
+// All Time By Age
+export type AgeJson = Record<string, Record<string, GeneralStats>>;
 
-export interface ClubStats {
-    overall: GeneralStats;
-    competitions: CompetitionStats;
-}
+// All Time Favourite Opponents
+export type FavouriteOpponentsJson = Record<string, FavouriteOpponent[]>;
 
-export type ClubJson = Record<
-    string,
-    Record<string, ClubStats>
->;
+// All Time By Finals
+export type FinalsJson = Record<string, OverallCompetitionStats>;
 
-export interface ClubSeasonStats {
-    overall: GeneralStats;
-    competitions: CompetitionStats;
-}
+/* ===== CLUB STATS ===== */
+// Club stats by clubs
+export type PlayerClubGeneralStats = Record<string, Record<string, OverallCompetitionStats>>;
 
-export type ClubSeasonJson = Record<
-    string,
-    Record<string, Record<string, ClubSeasonStats>>
->;
+// Club stats by season
+export type PlayerClubSeasonJson = Record<string, Record<string, OverallCompetitionStats>>;
 
-export type CountryCompetitionJson = Record<
-    string,
-    OverallCompetitionStats
->;
 
-export type CountryYearJson = Record<
-    string,
-    Record<string, OverallCompetitionStats>
->;
+/* ===== COUNTRY STATS ===== */
+// Country stats by competition
+export type CountryCompetitionJson = Record<string, OverallCompetitionStats>;
 
+// Country stats by year
+export type CountryYearJson = Record<string, Record<string, OverallCompetitionStats>>;
+
+
+/* ===== HONOURS ===== */
 export interface TrophyEntry {
     [key: string]: string | number | boolean;
 }
-
 export interface Trophy {
     title: string;
     count: number;
@@ -96,23 +70,14 @@ export interface PlayerHonours {
     team_trophies: Trophy[];
     individual_awards: Trophy[];
 }
-
 export interface Honours {
     players: PlayerHonours[];
 }
 
-export interface ComparisonSection {
-    title: string;
-    first: GeneralStats;
-    second: GeneralStats;
-}
 
 export type Player = "Kylian Mbappé" | "Erling Haaland";
-
 export type TeamType = "club" | "country";
-
 export type Result = "W" | "D" | "L";
-
 export type CompetitionTier =
     | "Domestic League"
     | "Domestic Cup"

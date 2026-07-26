@@ -1,9 +1,9 @@
-import type { OpponentStat } from "../Types.ts";
+import type { FavouriteOpponent } from "../utils/Types.ts";
 
 interface Props {
     playerName: string;
     color: string;
-    opponents: OpponentStat[];
+    opponents: FavouriteOpponent[];
 }
 
 // Only the top 3 rows get a distinct ring color; everything below is plain gray.

@@ -34,7 +34,6 @@ export const STATS_MENU = [
         ]
     },
 
-
     {
         title: "Club Stats",
 
@@ -51,7 +50,6 @@ export const STATS_MENU = [
             }
         ]
     },
-
 
     {
         title: "Country Stats",
