@@ -4,6 +4,7 @@ import { JSON_URLS } from "../../api/jsonUrls.ts";
 import { EMPTY_STATS } from "../../utils/Constants.ts";
 import StatsComparisonTable from "../../components/StatsComparisonTable.tsx";
 import PlayerComparisonGate from "../../components/PlayerComparisonGate.tsx";
+import Title from "../../components/Title.tsx";
 
 
 function seasonStartYear(season: string): number {
@@ -33,7 +34,7 @@ export default function BySeason() {
 
                 return (
                     <div className="space-y-8">
-                        <h1 className="text-4xl font-bold text-center">Record by Season</h1>
+                        <Title title="Record by Season"/>
 
                         <div className="flex flex-wrap justify-center gap-2">
                             {seasons.map((season) => {

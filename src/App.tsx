@@ -8,16 +8,12 @@ import {CountryStats} from "./pages/country_stats/CountryStats";
 import {Honours} from "./pages/honours/Honours.tsx";
 
 
-function App() {
+export default function App() {
     return (
         <BrowserRouter>
             <Header />
             <div className="flex justify-center">
-                <img
-                    src="/photos/mbappe-vs-haaland-main.png"
-                    alt="Mbappe vs Haaland"
-                    className="w-3/8 m-2"
-                />
+                <img src="/photos/mbappe-vs-haaland-main.png" alt="Mbappe vs Haaland" className="w-3/8 m-2"/>
             </div>
             <main className="max-w-7xl mx-auto px-6 py-8">
                 <Routes>
@@ -31,6 +27,3 @@ function App() {
         </BrowserRouter>
     );
 }
-
-
-export default App;

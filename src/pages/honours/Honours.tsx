@@ -15,8 +15,8 @@ export function Honours() {
                         element={
                             <Awards
                                 title="Team Trophies"
-                                firstTrophies={mbappe.team_trophies}
-                                secondTrophies={haaland.team_trophies}
+                                trophies1={mbappe.team_trophies}
+                                trophies2={haaland.team_trophies}
                             />
                         }
                     />
@@ -25,8 +25,8 @@ export function Honours() {
                         element={
                             <Awards
                                 title="Individual Awards"
-                                firstTrophies={mbappe.individual_awards}
-                                secondTrophies={haaland.individual_awards}
+                                trophies1={mbappe.individual_awards}
+                                trophies2={haaland.individual_awards}
                             />
                         }
                     />

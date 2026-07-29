@@ -3,6 +3,7 @@ import { JSON_URLS } from "../../api/jsonUrls.ts";
 import { EMPTY_STATS } from "../../utils/Constants.ts";
 import StatsComparisonTable from "../../components/StatsComparisonTable.tsx";
 import PlayerComparisonGate from "../../components/PlayerComparisonGate.tsx";
+import Title from "../../components/Title.tsx";
 
 
 export default function FinalsStats() {
@@ -15,7 +16,7 @@ export default function FinalsStats() {
 
                 return (
                     <div className="space-y-8">
-                        <h1 className="text-4xl font-bold text-center">Record in Finals</h1>
+                        <Title title="Record in Finals"/>
 
                         <div className="space-y-3">
                             <StatsComparisonTable

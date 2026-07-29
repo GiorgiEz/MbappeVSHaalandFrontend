@@ -3,6 +3,7 @@ import { JSON_URLS } from "../../api/jsonUrls.ts";
 import {MBAPPE_COLOR, HAALAND_COLOR, MBAPPE_NAME, HAALAND_NAME,} from "../../utils/Constants.ts";
 import ClubStatsPanel from "../../components/ClubStatsPanel.tsx";
 import PlayerComparisonGate from "../../components/PlayerComparisonGate.tsx";
+import Title from "../../components/Title.tsx";
 
 
 export default function ByClub() {
@@ -10,7 +11,7 @@ export default function ByClub() {
         <PlayerComparisonGate<PlayerClubGeneralStats> queryKey="byClub" url={JSON_URLS.club.byClub}>
             {({ mbappe, haaland }) => (
                 <div className="space-y-8">
-                    <h1 className="text-4xl font-bold text-center">Record by Club</h1>
+                    <Title title="Record by Club"/>
 
                     <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                         <ClubStatsPanel playerName={MBAPPE_NAME} color={MBAPPE_COLOR} clubs={mbappe}/>

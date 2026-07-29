@@ -3,6 +3,7 @@ import { JSON_URLS } from "../../api/jsonUrls.ts";
 import { EMPTY_STATS } from "../../utils/Constants.ts";
 import StatsComparisonTable from "../../components/StatsComparisonTable.tsx";
 import PlayerComparisonGate from "../../components/PlayerComparisonGate.tsx";
+import Title from "../../components/Title.tsx";
 
 
 export default function CompetitionStats() {
@@ -15,7 +16,7 @@ export default function CompetitionStats() {
 
                 return (
                     <div className="space-y-8">
-                        <h1 className="text-4xl font-bold text-center">Comparison by Competitions</h1>
+                        <Title title="Comparison by Competitions"/>
 
                         {competitionGroups.map((group) => (
                             <StatsComparisonTable
