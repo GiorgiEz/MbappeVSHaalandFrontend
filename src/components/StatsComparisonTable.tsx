@@ -1,12 +1,13 @@
 import type { GeneralStats } from "../utils/Types.ts";
 import {HAALAND_COLOR, MBAPPE_COLOR, HAALAND_NAME, MBAPPE_NAME, NOT_LEADING_COLOR} from "../utils/Constants.ts"
 import {formatValue, hexToRgba} from "../utils/helper_functions.ts";
+import Title from "../components/Title.tsx";
+
 
 interface Props {
     title: string;
     firstPlayer: GeneralStats;
     secondPlayer: GeneralStats;
-    compact?: boolean;
 }
 
 interface StatField {
@@ -39,8 +40,8 @@ export default function StatsComparisonTable({title, firstPlayer, secondPlayer}:
     ];
 
     return (
-        <div className="rounded-4xl border border-gray-900 bg-white mx-auto w-full md:w-3/5 shadow-lg shadow-gray-900/5">
-            <h2 className="border-b border-gray-100 text-center font-bold text-gray-900 p-6 text-xl">{title}</h2>
+        <div className="rounded-4xl border border-gray-900 bg-black mx-auto w-full md:w-3/5 shadow-lg shadow-gray-900/5">
+            <Title title={title} />
 
             {/* apps / goals / assists — one side per player */}
             <div className="grid grid-cols-2 border-t border-gray-100 gap-3 p-4 sm:gap-4 sm:p-6">

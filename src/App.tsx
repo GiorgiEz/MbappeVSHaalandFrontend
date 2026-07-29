@@ -11,19 +11,27 @@ import {Honours} from "./pages/honours/Honours.tsx";
 export default function App() {
     return (
         <BrowserRouter>
-            <Header />
-            <div className="flex justify-center">
-                <img src="/photos/mbappe-vs-haaland-main.png" alt="Mbappe vs Haaland" className="w-3/8 m-2"/>
+            <div className="fixed inset-0 -z-10 overflow-hidden">
+                <img
+                    src="/photos/mbappe-vs-haaland-main.png"
+                    alt="Mbappe vs Haaland"
+                    className="h-full w-full object-cover blur-xs"
+                />
             </div>
-            <main className="max-w-7xl mx-auto px-6 py-8">
-                <Routes>
-                    <Route path="*" element={<AllTimeStats />}/>
-                    <Route path="/all-time/*" element={<AllTimeStats />}/>
-                    <Route path="/club/*" element={<ClubStats />}/>
-                    <Route path="/country/*" element={<CountryStats />}/>
-                    <Route path="/honours/*" element={<Honours />}/>
-                </Routes>
-            </main>
+
+            <div className="relative z-10">
+                <Header />
+
+                <main className="max-w-7xl mx-auto px-6 py-8">
+                    <Routes>
+                        <Route path="*" element={<AllTimeStats />} />
+                        <Route path="/all-time/*" element={<AllTimeStats />} />
+                        <Route path="/club/*" element={<ClubStats />} />
+                        <Route path="/country/*" element={<CountryStats />} />
+                        <Route path="/honours/*" element={<Honours />} />
+                    </Routes>
+                </main>
+            </div>
         </BrowserRouter>
     );
 }

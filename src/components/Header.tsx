@@ -17,14 +17,14 @@ export default function Header() {
                         <div key={menu.title} className="relative group">
                             <button
                                 className="
-                                    flex items-center gap-1.5 rounded-md px-4 py-2.5 font-semibold text-gray-200
-                                    transition-colors duration-15 hover:text-emerald-600 group-focus-within:text-emerald-600"
+                                    flex items-center gap-1.5 rounded-md px-4 py-2.5 font-semibold text-gray-300
+                                    transition-colors duration-15 hover:text-white"
                             >
                                 {menu.title}
                                 {menu.items.length > 0 &&
-                                    <svg className="h-3.5 w-3.5 text-gray-200 transition-transform duration-200
-                                            group-hover:rotate-180 group-hover:text-emerald-600
-                                            group-focus-within:rotate-180 group-focus-within:text-emerald-600"
+                                    <svg className="h-3.5 w-3.5 text-gray-300 transition-transform duration-200
+                                            group-hover:rotate-180 group-hover:text-white
+                                            group-focus-within:rotate-180"
                                         viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"
                                     >
                                         <path
@@ -52,8 +52,8 @@ export default function Header() {
                                                 className={({ isActive }) =>
                                                     `block rounded-lg px-3.5 py-2.5 text-sm font-medium transition-colors duration-150 ${
                                                         isActive
-                                                            ? "text-emerald-600"
-                                                            : "text-gray-200 hover:text-emerald-600"
+                                                            ? "text-white"
+                                                            : "text-gray-300 hover:text-white"
                                                     }`
                                                 }
                                             >

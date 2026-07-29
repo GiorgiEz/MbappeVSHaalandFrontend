@@ -31,7 +31,7 @@ export default function FavouriteOpponentStats() {
 
                                 return (
                                     <div key={player.playerName}
-                                        className="rounded-2xl border border-gray-100 bg-white shadow-lg shadow-gray-900/5"
+                                        className="rounded-2xl border border-gray-100 bg-black shadow-lg shadow-gray-900/5"
                                         style={{borderTop: `4px solid ${player.color}`}}>
                                         <h2 className="border-b border-gray-100 p-6 text-center text-xl font-bold"
                                             style={{color: player.color}}
@@ -58,7 +58,7 @@ export default function FavouriteOpponentStats() {
 
                                                             <div className="min-w-0 flex-1">
                                                                 <div className="flex items-baseline justify-between gap-2">
-                                                                    <span className="truncate font-semibold text-gray-900">
+                                                                    <span className="truncate font-semibold text-gray-400">
                                                                         {opponent.opponent}
                                                                     </span>
 

@@ -4,12 +4,17 @@ import { EMPTY_STATS } from "../../utils/Constants.ts";
 import StatsComparisonTable from "../../components/StatsComparisonTable.tsx";
 import PlayerComparisonGate from "../../components/PlayerComparisonGate.tsx";
 import Title from "../../components/Title.tsx";
+import LoadingScreen from "../../components/LoadingScreen.tsx";
 
 
 export default function ByCompetition() {
     return (
         <PlayerComparisonGate<CountryCompetitionJson> queryKey="byCompetition" url={JSON_URLS.country.byCompetition}>
             {({ mbappe, haaland }) => {
+                if (!mbappe.competitions || !haaland.competitions) {
+                    return <LoadingScreen />;
+                }
+
                 const competitionNames = Array.from(
                     new Set([...Object.keys(mbappe.competitions), ...Object.keys(haaland.competitions)])
                 );

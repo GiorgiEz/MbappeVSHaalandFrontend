@@ -28,7 +28,7 @@ function ClubPanel({playerName, color, clubs,}: { playerName: string; color: str
     const competitionNames = clubData ? Object.keys(clubData.competitions) : [];
 
     return (
-        <div className="rounded-2xl border border-gray-100 bg-white shadow-lg shadow-gray-900/5"
+        <div className="rounded-2xl border border-gray-100 bg-black shadow-lg shadow-gray-900/5"
             style={{ borderTop: `4px solid ${color}` }}
         >
             <div className="border-b border-gray-100 p-6 text-center">
@@ -67,7 +67,7 @@ function ClubPanel({playerName, color, clubs,}: { playerName: string; color: str
             </div>
 
             {!clubData ? (
-                <p className="p-6 text-center text-gray-400">No data for this club.</p>
+                <p className="p-6 text-center text-gray-200">No data for this club.</p>
             ) : (
                 <>
                     <div className="grid grid-cols-3 gap-3 bg-gray-50/60 p-4 sm:gap-4 sm:p-6">
@@ -100,7 +100,7 @@ function ClubPanel({playerName, color, clubs,}: { playerName: string; color: str
                                     {field.label}
                                 </span>
 
-                                <span className="text-base font-bold text-gray-800 sm:text-lg">
+                                <span className="text-base font-bold text-gray-400 sm:text-lg">
                                     {formatValue(clubData.overall[field.key])}
                                 </span>
                             </div>
@@ -127,11 +127,11 @@ function ClubPanel({playerName, color, clubs,}: { playerName: string; color: str
                                             ),
                                         }}
                                     >
-                                        <span className="truncate text-sm font-medium text-gray-700">
+                                        <span className="truncate text-sm font-medium text-gray-400">
                                             {name}
                                         </span>
 
-                                        <span className="shrink-0 text-xs text-gray-500">
+                                        <span className="shrink-0 text-xs text-gray-400">
                                             {formatValue(stats.apps)} apps ·{" "}
                                             {formatValue(stats.goals)} G ·{" "}
                                             {formatValue(stats.assists)} A

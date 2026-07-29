@@ -15,5 +15,9 @@ export default function PlayerComparisonGate
     if (result.status === "loading") return <LoadingScreen />;
     if (result.status === "error") return <p>Failed to load statistics.</p>;
 
+    if (!result.mbappe || !result.haaland) {
+        return <LoadingScreen />;
+    }
+
     return <>{children({ mbappe: result.mbappe, haaland: result.haaland })}</>;
 }

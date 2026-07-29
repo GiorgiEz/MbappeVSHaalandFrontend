@@ -27,7 +27,7 @@ export default function Awards({title, trophies1, trophies2}: {title: string; tr
                 {players.map((player) => (
                     <div
                         key={player.playerName}
-                        className="rounded-2xl border border-gray-100 bg-white shadow-lg shadow-gray-900/5"
+                        className="rounded-2xl border border-gray-100 bg-black shadow-lg shadow-gray-900/5"
                         style={{borderTop: `4px solid ${player.color}`}}
                     >
                         <h2
@@ -41,7 +41,7 @@ export default function Awards({title, trophies1, trophies2}: {title: string; tr
                             {player.trophies.map((trophy) => (
                                 <div key={`${player.playerName}-${trophy.title}`} className="p-4 sm:p-5">
                                     <div className="flex items-center justify-between gap-3">
-                                        <span className="font-semibold text-gray-900">{trophy.title}</span>
+                                        <span className="font-semibold text-gray-400">{trophy.title}</span>
 
                                         <span
                                             className="shrink-0 rounded-full px-2.5 py-0.5 text-xs font-bold"
