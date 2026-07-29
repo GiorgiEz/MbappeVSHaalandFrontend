@@ -1,18 +1,14 @@
 import { NavLink } from "react-router-dom";
-import { STATS_MENU } from "./statsMenu.ts";
+import { STATS_MENU } from "../utils/statsMenu.ts";
 
 
 export default function Header() {
     return (
-        <header className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200">
+        <header className="sticky top-0 z-50 bg-black backdrop-blur-sm border-b border-gray-200">
             <div className="relative flex items-center p-3">
-                {/* Brand — absolutely positioned so it never competes with
-                    the nav's own flex sizing, keeping the nav truly page-centered */}
                 <NavLink to="/" className="absolute left-4 flex items-center gap-2 sm:left-6">
-                    <img
-                        src="/photos/mbappe-vs-haaland-logo.png"
-                        alt="Mbappé vs Haaland"
-                        className="h-14 w-32 object-cover"
+                    <img src="/photos/mbappe-vs-haaland-logo.png"
+                        alt="Mbappé vs Haaland" className="h-14 w-32 object-cover"
                     />
                 </NavLink>
 
@@ -21,7 +17,7 @@ export default function Header() {
                         <div key={menu.title} className="relative group">
                             <button
                                 className="
-                                    flex items-center gap-1.5 rounded-md px-4 py-2.5 font-semibold text-gray-700
+                                    flex items-center gap-1.5 rounded-md px-4 py-2.5 font-semibold text-gray-200
                                     transition-colors duration-150 hover:bg-emerald-50 hover:text-emerald-700
                                     group-focus-within:bg-emerald-50 group-focus-within:text-emerald-700
                                 "
@@ -30,8 +26,7 @@ export default function Header() {
                                 {menu.items.length > 0 &&
                                     <svg
                                         className="
-                                            h-3.5 w-3.5 text-gray-400
-                                            transition-transform duration-200
+                                            h-3.5 w-3.5 text-gray-200 transition-transform duration-200
                                             group-hover:rotate-180 group-hover:text-emerald-600
                                             group-focus-within:rotate-180 group-focus-within:text-emerald-600
                                         "

@@ -4,11 +4,13 @@ import { useJsonStats } from "../../hooks/useJsonStats.ts";
 import type { Honours } from "../../utils/Types.ts";
 import { JSON_URLS } from "../../api/jsonUrls.ts";
 import { HAALAND_NAME, MBAPPE_NAME } from "../../utils/Constants.ts";
+import LoadingScreen from "../../components/LoadingScreen.tsx"
+
 
 export function Honours() {
     const { data, isLoading, error } = useJsonStats<Honours>("honours", JSON_URLS.honours);
 
-    if (isLoading) return <p>Loading statistics...</p>;
+    if (isLoading) return <LoadingScreen/>;
     if (error || !data) return <p>Failed to load statistics.</p>;
 
     const mbappe = data.players.find(p => p.player === MBAPPE_NAME);
