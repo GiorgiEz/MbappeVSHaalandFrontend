@@ -11,11 +11,11 @@ import {Honours} from "./pages/honours/Honours.tsx";
 export default function App() {
     return (
         <BrowserRouter>
-            <div className="fixed inset-0 -z-10 overflow-hidden">
+            <div className="fixed inset-0 -z-10 overflow-hidden flex justify-center items-center">
                 <img
                     src="/photos/mbappe-vs-haaland-main.png"
                     alt="Mbappe vs Haaland"
-                    className="h-full w-full object-cover blur-xs"
+                    className="w-3/4 h-5/8 object-cover blur-xs"
                 />
             </div>
 
