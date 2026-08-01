@@ -65,10 +65,48 @@ export interface Trophy {
     entries: TrophyEntry[];
 }
 
+export interface OverallCategory {
+    category: string;
+    count: number;
+}
+
+export interface ClubOverall {
+    count: number;
+    breakdown: OverallCategory[];
+}
+
+export interface InternationalOverall {
+    count: number;
+}
+
+export interface TeamTrophiesOverall {
+    total: number;
+    club: ClubOverall;
+    international: InternationalOverall;
+}
+
+export interface IndividualAwardsOverall {
+    total: number;
+    breakdown: OverallCategory[];
+}
+
+export interface TeamTrophiesSection {
+    overall: TeamTrophiesOverall;
+    breakdown: Trophy[];
+}
+
+export interface IndividualAwardsSection {
+    overall: IndividualAwardsOverall;
+    breakdown: Trophy[];
+}
+
+/** Either honours section — Awards.tsx renders both through this union. */
+export type HonoursSection = TeamTrophiesSection | IndividualAwardsSection;
+
 export interface PlayerHonours {
     player: string;
-    team_trophies: Trophy[];
-    individual_awards: Trophy[];
+    team_trophies: TeamTrophiesSection;
+    individual_awards: IndividualAwardsSection;
 }
 export interface Honours {
     players: PlayerHonours[];
