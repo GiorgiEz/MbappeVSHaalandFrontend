@@ -17,6 +17,11 @@ export const STATS_MENU = [
                 json: JSON_URLS.allTime.byCompetition
             },
             {
+                name: "Seasons",
+                path: "/all-time/seasons",
+                json: JSON_URLS.allTime.seasons
+            },
+            {
                 name: "Age Comparison",
                 path: "/all-time/age",
                 json: JSON_URLS.allTime.age
@@ -42,6 +47,11 @@ export const STATS_MENU = [
                 name: "By Club",
                 path: "/club/by-club",
                 json: JSON_URLS.club.byClub
+            },
+            {
+                name: "Competitions",
+                path: "/club/competitions",
+                json: JSON_URLS.club.competitions
             },
             {
                 name: "By Season",

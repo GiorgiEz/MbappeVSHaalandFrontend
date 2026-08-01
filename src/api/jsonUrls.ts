@@ -4,7 +4,10 @@ export const JSON_URLS = {
             "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/all_time_stats/career.json",
 
         byCompetition:
-            "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/all_time_stats/by_competition.json",
+            "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/all_time_stats/competitions.json",
+
+        seasons:
+            "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/all_time_stats/seasons.json",
 
         age:
             "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/all_time_stats/age.json",
@@ -18,18 +21,21 @@ export const JSON_URLS = {
 
     club: {
         byClub:
-            "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/club_stats/by_club.json",
+            "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/club_stats/clubs.json",
+
+        competitions:
+            "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/club_stats/competitions.json",
 
         bySeason:
-            "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/club_stats/by_season.json",
+            "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/club_stats/seasons.json",
     },
 
     country: {
         byCompetition:
-            "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/country_stats/by_competition.json",
+            "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/country_stats/competitions.json",
 
         byYear:
-            "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/country_stats/by_year.json",
+            "https://raw.githubusercontent.com/GiorgiEz/MbappeVSHaalandJson/main/country_stats/years.json",
     },
 
     honours:

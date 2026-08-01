@@ -1,10 +1,11 @@
 import { Navigate, Routes, Route } from "react-router-dom";
 
-import CareerStats from "./CareerStats";
-import CompetitionStats from "./CompetitionStats";
-import AgeStats from "./AgeStats";
-import FinalsStats from "./FinalsStats";
-import FavouriteOpponentStats from "./FavouriteOpponentStats";
+import CareerStats from "./CareerStats.tsx";
+import CompetitionStats from "./CompetitionStats.tsx";
+import AgeStats from "./AgeStats.tsx";
+import FinalsStats from "./FinalsStats.tsx";
+import FavouriteOpponentStats from "./FavouriteOpponentStats.tsx";
+import Seasons from "./Seasons.tsx";
 
 
 export default function AllTimeStats() {
@@ -13,6 +14,7 @@ export default function AllTimeStats() {
         <Routes>
             <Route path="career" element={<CareerStats />}/>
             <Route path="competitions" element={<CompetitionStats />}/>
+            <Route path="seasons" element={<Seasons />}/>
             <Route path="age" element={<AgeStats />}/>
             <Route path="finals" element={<FinalsStats />}/>
             <Route path="opponents" element={<FavouriteOpponentStats />}/>
