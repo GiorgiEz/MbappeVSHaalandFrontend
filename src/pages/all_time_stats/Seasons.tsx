@@ -1,7 +1,6 @@
 import { useState } from "react";
-import type { PlayerClubSeasonJson } from "../../utils/Types.ts";
+import type { SeasonsType } from "../../utils/Types.ts";
 import { JSON_URLS } from "../../api/jsonUrls.ts";
-import { EMPTY_STATS } from "../../utils/Constants.ts";
 import StatsComparisonTable from "../../components/StatsComparisonTable.tsx";
 import PlayerComparisonGate from "../../components/PlayerComparisonGate.tsx";
 import Title from "../../components/Title.tsx";
@@ -15,22 +14,16 @@ export default function Seasons() {
     const [selectedSeason, setSelectedSeason] = useState<string | null>(null);
 
     return (
-        <PlayerComparisonGate<PlayerClubSeasonJson> queryKey="seasons" url={JSON_URLS.allTime.seasons}>
+        <PlayerComparisonGate<SeasonsType> queryKey="seasons" url={JSON_URLS.allTime.seasons}>
             {({ mbappe, haaland }) => {
                 const seasons = Array.from(
                     new Set([...Object.keys(mbappe), ...Object.keys(haaland)]))
                     .sort((a, b) => seasonStartYear(a) - seasonStartYear(b)
                     );
 
-                const activeSeason =
-                    selectedSeason ?? seasons[seasons.length - 1];
-
+                const activeSeason = selectedSeason ?? seasons[seasons.length - 1];
                 const mbappeSeason = mbappe[activeSeason];
                 const haalandSeason = haaland[activeSeason];
-
-                const competitionNames = Array.from(
-                    new Set([...Object.keys(mbappeSeason?.competitions ?? {}), ...Object.keys(haalandSeason?.competitions ?? {})])
-                );
 
                 return (
                     <div className="space-y-8">
@@ -45,11 +38,12 @@ export default function Seasons() {
                                         key={season}
                                         onClick={() => setSelectedSeason(season)}
                                         aria-pressed={isActive}
-                                        className={`rounded-full px-4 py-1.5 text-sm font-semibold transition-colors duration-150 ${
+                                        className="rounded-full px-4 py-1.5 text-sm font-semibold transition-colors duration-150"
+                                        style={
                                             isActive
-                                                ? "bg-gray-900 text-white"
-                                                : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                                        }`}
+                                                ? {backgroundColor: "#ffffff", color: "#000000"}
+                                                : {backgroundColor: "#1f1f1f", color: "#9ca3af"}
+                                        }
                                     >
                                         {season}
                                     </button>
@@ -60,18 +54,9 @@ export default function Seasons() {
                         <div className="space-y-3">
                             <StatsComparisonTable
                                 title={`Season ${activeSeason}`}
-                                firstPlayer={mbappeSeason?.overall ?? EMPTY_STATS}
-                                secondPlayer={haalandSeason?.overall ?? EMPTY_STATS}
+                                firstPlayer={mbappeSeason}
+                                secondPlayer={haalandSeason}
                             />
-
-                            {competitionNames.map((name) => (
-                                <StatsComparisonTable
-                                    key={name}
-                                    title={name}
-                                    firstPlayer={mbappeSeason?.competitions[name] ?? EMPTY_STATS}
-                                    secondPlayer={haalandSeason?.competitions[name] ?? EMPTY_STATS}
-                                />
-                            ))}
                         </div>
                     </div>
                 );

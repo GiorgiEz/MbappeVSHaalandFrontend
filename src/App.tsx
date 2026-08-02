@@ -11,15 +11,7 @@ import {Honours} from "./pages/honours/Honours.tsx";
 export default function App() {
     return (
         <BrowserRouter>
-            <div className="fixed inset-0 -z-10 overflow-hidden flex justify-center items-center">
-                <img
-                    src="/photos/mbappe-vs-haaland-main.png"
-                    alt="Mbappe vs Haaland"
-                    className="w-3/4 h-5/8 object-cover blur-xs"
-                />
-            </div>
-
-            <div className="relative z-10">
+            <div className="relative z-10 bg-gray-800">
                 <Header />
 
                 <main className="max-w-7xl mx-auto px-6 py-8">

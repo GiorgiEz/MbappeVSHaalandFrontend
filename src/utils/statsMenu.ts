@@ -14,7 +14,7 @@ export const STATS_MENU = [
             {
                 name: "Competitions",
                 path: "/all-time/competitions",
-                json: JSON_URLS.allTime.byCompetition
+                json: JSON_URLS.allTime.competitions
             },
             {
                 name: "Seasons",
@@ -28,8 +28,8 @@ export const STATS_MENU = [
             },
             {
                 name: "Favourite Opponents",
-                path: "/all-time/opponents",
-                json: JSON_URLS.allTime.favouriteOpponents
+                path: "/all-time/favourite_opponents",
+                json: JSON_URLS.allTime.favourite_opponents
             },
             {
                 name: "Finals",
@@ -44,19 +44,19 @@ export const STATS_MENU = [
 
         items: [
             {
-                name: "By Club",
-                path: "/club/by-club",
-                json: JSON_URLS.club.byClub
+                name: "Clubs",
+                path: "/club/clubs",
+                json: JSON_URLS.club.clubs
             },
             {
                 name: "Competitions",
                 path: "/club/competitions",
-                json: JSON_URLS.club.competitions
+                json: JSON_URLS.allTime.competitions
             },
             {
-                name: "By Season",
-                path: "/club/by-season",
-                json: JSON_URLS.club.bySeason
+                name: "Seasons",
+                path: "/club/seasons",
+                json: JSON_URLS.club.seasons
             }
         ]
     },
@@ -67,13 +67,13 @@ export const STATS_MENU = [
         items: [
             {
                 name: "Competitions",
-                path: "/country/by-competition",
-                json: JSON_URLS.country.byCompetition
+                path: "/country/competitions",
+                json: JSON_URLS.allTime.competitions
             },
             {
-                name: "By Year",
-                path: "/country/by-year",
-                json: JSON_URLS.country.byYear
+                name: "Years",
+                path: "/country/years",
+                json: JSON_URLS.country.years
             }
         ]
     },

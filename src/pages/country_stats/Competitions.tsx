@@ -6,11 +6,11 @@ import Title from "../../components/Title.tsx";
 import {capitalize} from "../../utils/helper_functions.ts";
 
 
-export default function ByCompetition() {
+export default function Competitions() {
     return (
         <PlayerComparisonGate<CompetitionsType> queryKey="competitions" url={JSON_URLS.allTime.competitions}>
             {({ mbappe, haaland }) => {
-                const teamType = "club"
+                const teamType = "country"
 
                 return (
                     <div className="space-y-8">

@@ -8,16 +8,24 @@ interface Props<TJson extends Record<string, unknown>> {
     children: (players: { mbappe: TJson[string]; haaland: TJson[string] }) => ReactNode;
 }
 
-export default function PlayerComparisonGate
-        <TJson extends Record<string, unknown>>({queryKey, url, children}: Props<TJson>) {
+export default function PlayerComparisonGate<TJson extends Record<string, unknown>>({queryKey, url, children}: Props<TJson>) {
     const result = usePlayerComparison<TJson>(queryKey, url);
 
-    if (result.status === "loading") return <LoadingScreen />;
-    if (result.status === "error") return <p>Failed to load statistics.</p>;
+    switch (result.status) {
+        case "loading":
+            return <LoadingScreen/>;
 
-    if (!result.mbappe || !result.haaland) {
-        return <LoadingScreen />;
+        case "error":
+            return <p>Failed to load statistics.</p>;
+
+        case "ready":
+            return (
+                <>
+                    {children({
+                        mbappe: result.mbappe,
+                        haaland: result.haaland,
+                    })}
+                </>
+            );
     }
-
-    return <>{children({ mbappe: result.mbappe, haaland: result.haaland })}</>;
 }

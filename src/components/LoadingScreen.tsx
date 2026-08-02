@@ -6,7 +6,7 @@ export default function LoadingScreen() {
         <div
             role="status"
             aria-live="polite"
-            className="fixed inset-0 z-[60] flex items-center justify-center bg-white/50 backdrop-blur-sm"
+            className="fixed inset-0 z-[60] flex items-center justify-center bg-gray-800 backdrop-blur-sm"
         >
             <div className="flex flex-col items-center gap-4 rounded-2xl border border-gray-100 bg-black px-8 py-6 shadow-lg shadow-gray-900/5">
                 <div className="flex items-center gap-3">

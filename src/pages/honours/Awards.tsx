@@ -1,10 +1,10 @@
-import type {HonoursSection, OverallCategory, TeamTrophiesOverall, IndividualAwardsOverall, TrophyEntry} from "../../utils/Types.ts";
+import type {HonourType, OverallType, OverallBreakdown, ClubInternationalOverallType, EntryType} from "../../utils/Types.ts";
 import {HAALAND_NAME, MBAPPE_NAME, MBAPPE_COLOR, HAALAND_COLOR,} from "../../utils/Constants.ts";
 import { hexToRgba } from "../../utils/helper_functions.ts";
 import Title from "../../components/Title.tsx";
 
 
-function formatEntry(entry: TrophyEntry): string {
+function formatEntry(entry: EntryType): string {
     const dateKey = "season" in entry ? "season" : "year" in entry ? "year" : null;
     const dateValue = dateKey ? String(entry[dateKey]) : null;
     const rest = Object.entries(entry)
@@ -13,26 +13,23 @@ function formatEntry(entry: TrophyEntry): string {
     return [dateValue, ...rest].filter(Boolean).join(" · ");
 }
 
-/** Distinguishes team_trophies' overall (club/international) from
- * individual_awards' overall (flat breakdown) so both can be rendered
+/** Distinguishes team_trophies' overall (club/international split)
+ * from individual_awards' overall (flat breakdown) so both render
  * through the same pill list. */
-function isTeamTrophiesOverall(
-    overall: TeamTrophiesOverall | IndividualAwardsOverall
-): overall is TeamTrophiesOverall {
+function isClubInternationalOverall(
+    overall: OverallType
+): overall is ClubInternationalOverallType {
     return "club" in overall;
 }
 
-function getOverallCategories(overall: TeamTrophiesOverall | IndividualAwardsOverall): OverallCategory[] {
-    if (isTeamTrophiesOverall(overall)) {
-        return [
-            ...overall.club.breakdown,
-            { category: "International", count: overall.international.count },
-        ];
+function getOverallCategories(overall: OverallType): OverallBreakdown[] {
+    if (isClubInternationalOverall(overall)) {
+        return [...overall.club.breakdown, ...overall.international.breakdown];
     }
     return overall.breakdown;
 }
 
-export default function Awards({title, trophies1, trophies2}: {title: string; trophies1: HonoursSection; trophies2: HonoursSection}){
+export default function Awards({title, trophies1, trophies2}: {title: string; trophies1: HonourType; trophies2: HonourType}){
     const players = [
         {playerName: MBAPPE_NAME, color: MBAPPE_COLOR, section: trophies1},
         {playerName: HAALAND_NAME, color: HAALAND_COLOR, section: trophies2},
