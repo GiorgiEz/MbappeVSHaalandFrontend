@@ -1,4 +1,5 @@
-export interface GeneralStats {
+/* ===== GENERAL STATS ===== */
+export interface GeneralStatsType {
     apps: number;
     goals: number;
     assists: number;
@@ -7,69 +8,126 @@ export interface GeneralStats {
     minutes_per_goal_contribution: number | null;
 }
 
-export interface OverallCompetitionStats {
-    overall: GeneralStats;
-    competitions: CompetitionStats;
+export interface CompetitionType {
+    [competition: string]: GeneralStatsType;
 }
 
-export interface CompetitionStats {
-    [competition: string]: GeneralStats;
+export interface CompetitionTiersType {
+    [competition_tier: string]: {
+        overall: GeneralStatsType;
+        competitions: CompetitionType;
+    };
 }
 
-export interface FavouriteOpponent {
+export interface OverallCompetitionTiersType {
+    overall: GeneralStatsType;
+    competition_tiers: CompetitionTiersType;
+}
+
+/* ===== ALL-TIME STATS ===== */
+export interface AgeType {
+    [age: string]: OverallCompetitionTiersType;
+}
+
+export interface CareerType {
+    career: GeneralStatsType;
+    club: GeneralStatsType;
+    country: GeneralStatsType;
+}
+
+export interface CompetitionsType {
+    club: OverallCompetitionTiersType;
+    country: OverallCompetitionTiersType;
+}
+
+export interface FavouriteOpponentEntry {
     opponent: string;
     apps: number;
     goals: number;
     assists: number;
 }
 
-/* ===== ALL TIME STATS ===== */
-// All Time Career
-export type CareerJson = Record<string, Record<string, GeneralStats>>;
+export interface FavouriteOpponentsType {
+    club: FavouriteOpponentEntry[];
+    country: FavouriteOpponentEntry[];
+}
 
-// All Time By Competition
-export type CompetitionJson = Record<string, Record<string, OverallCompetitionStats>>;
+export interface FinalsType {
+    Y: OverallCompetitionTiersType;
+}
 
-// All Time By Age
-export type AgeJson = Record<string, Record<string, GeneralStats>>;
-
-// All Time Favourite Opponents
-export type FavouriteOpponentsJson = Record<string, FavouriteOpponent[]>;
-
-// All Time By Finals
-export type FinalsJson = Record<string, OverallCompetitionStats>;
+export interface SeasonsType {
+    [season: string]: OverallCompetitionTiersType;
+}
 
 /* ===== CLUB STATS ===== */
-// Club stats by clubs
-export type PlayerClubGeneralStats = Record<string, Record<string, OverallCompetitionStats>>;
+export interface ClubsType {
+    [team: string]: OverallCompetitionTiersType;
+}
 
-// Club stats by season
-export type PlayerClubSeasonJson = Record<string, Record<string, OverallCompetitionStats>>;
-
+export interface ClubSeasonsType {
+    [season: string]: OverallCompetitionTiersType;
+}
 
 /* ===== COUNTRY STATS ===== */
-// Country stats by competition
-export type CountryCompetitionJson = Record<string, OverallCompetitionStats>;
-
-// Country stats by year
-export type CountryYearJson = Record<string, Record<string, OverallCompetitionStats>>;
-
+export interface YearsType {
+    [year: string]: OverallCompetitionTiersType;
+}
 
 /* ===== HONOURS ===== */
-export interface TrophyEntry {
-    [key: string]: string | number | boolean;
-}
-export interface Trophy {
-    title: string;
+export interface OverallBreakdown {
+    category: string;
     count: number;
-    entries: TrophyEntry[];
 }
 
-export interface PlayerHonours {
-    player: string;
-    team_trophies: Trophy[];
-    individual_awards: Trophy[];
+export interface TeamType {
+    count: number;
+    breakdown: OverallBreakdown[];
 }
+
+/**
+ * team_trophies' overall: split into club vs. international,
+ * each with its own category breakdown (e.g. club: League/Domestic
+ * Cups/UCL/Others, international: World Cup/Euro/Nations League).
+ */
+export interface ClubInternationalOverallType {
+    total: number;
+    club: TeamType;
+    international: TeamType;
+}
+
+/**
+ * individual_awards' overall: a single flat category breakdown
+ * (Golden Boot / Player of the Year / Other) — no club/international
+ * split, since individual awards aren't scoped that way.
+ */
+export interface FlatOverallType {
+    total: number;
+    breakdown: OverallBreakdown[];
+}
+
+/** team_trophies and individual_awards use different overall shapes;
+ * this covers both real cases from the generated JSON. */
+export type OverallType = ClubInternationalOverallType | FlatOverallType;
+
+export interface EntryType {
+    [key: string]: string | number | boolean;
+}
+
+export interface BreakdownType {
+    title: string;
+    count: number;
+    entries: EntryType[];
+}
+
+export interface HonourType {
+    overall: OverallType;
+    breakdown: BreakdownType[];
+}
+
+/** Per-player honours: what PlayerComparisonGate provides as
+ * `mbappe` / `haaland` once it maps the raw JSON's player-name keys. */
 export interface Honours {
-    players: PlayerHonours[];
+    team_trophies: HonourType;
+    individual_awards: HonourType;
 }
