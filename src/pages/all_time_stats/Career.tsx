@@ -15,7 +15,7 @@ export default function Career() {
                 );
 
                 return (
-                    <div className="space-y-8 w-3/5 mx-auto">
+                    <div className="mx-auto w-[95%] min-[900px]:w-3/5 space-y-8">
                         <Title title="All Time Career"/>
 
                         {careerGroups.map((group) => (
