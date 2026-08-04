@@ -1,6 +1,6 @@
 export function formatValue(value: number | null): string {
     if (value === null) return "-";
-    return Number.isInteger(value) ? value.toString() : value.toFixed(2);
+    return Number.isInteger(value) ? value.toString() : value.toFixed(0);
 }
 
 export function hexToRgba(hex: string, alpha: number): string {
