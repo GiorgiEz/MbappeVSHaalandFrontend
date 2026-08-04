@@ -2,14 +2,14 @@ import type { ReactNode } from "react";
 import { usePlayerComparison } from "../hooks/usePlayerComparison.ts";
 import LoadingScreen from "./LoadingScreen.tsx";
 
-interface Props<TJson extends Record<string, unknown>> {
+interface Props<TPlayer> {
     queryKey: string;
     url: string;
-    children: (players: { mbappe: TJson[string]; haaland: TJson[string] }) => ReactNode;
+    children: (players: { mbappe: TPlayer; haaland: TPlayer }) => ReactNode;
 }
 
-export default function PlayerComparisonGate<TJson extends Record<string, unknown>>({queryKey, url, children}: Props<TJson>) {
-    const result = usePlayerComparison<TJson>(queryKey, url);
+export default function PlayerComparisonGate<TPlayer>({queryKey, url, children}: Props<TPlayer>) {
+    const result = usePlayerComparison<TPlayer>(queryKey, url);
 
     switch (result.status) {
         case "loading":
