@@ -30,14 +30,11 @@ export interface AgeType {
 }
 
 export interface CareerType {
-    career: GeneralStatsType;
-    club: GeneralStatsType;
-    country: GeneralStatsType;
+    [category: string]: GeneralStatsType;
 }
 
 export interface CompetitionsType {
-    club: OverallCompetitionTiersType;
-    country: OverallCompetitionTiersType;
+    [team_type: string]: OverallCompetitionTiersType;
 }
 
 export interface FavouriteOpponentEntry {
