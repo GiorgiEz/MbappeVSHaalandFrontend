@@ -29,7 +29,7 @@ function OpponentColumn({name, color, opponents}: PlayerType) {
             {/* Opponents */}
             <div className="divide-y divide-gray-100">
                 {opponents.map((opponent, index) => {
-                    const rankColor = RANK_COLORS[index] ?? "#E5E7EB";
+                    const rankColor = RANK_COLORS[index] ?? "#FFFFFF";
                     const barWidth = maxGoals > 0 ? (opponent.goals / maxGoals) * 100 : 0;
 
                     return (
@@ -42,11 +42,11 @@ function OpponentColumn({name, color, opponents}: PlayerType) {
 
                             <div className="min-w-0 flex-1">
                                 <div className="flex justify-between gap-2">
-                                    <span className="truncate text-sm font-semibold text-gray-400">
+                                    <span className="truncate text-sm font-semibold text-white">
                                         {opponent.opponent}
                                     </span>
 
-                                    <div className="shrink-0 text-xs text-gray-400">
+                                    <div className="shrink-0 text-xs text-white">
                                         <span className="mr-2">{opponent.apps} apps </span>
                                         <span>{opponent.assists} assists </span>
                                     </div>

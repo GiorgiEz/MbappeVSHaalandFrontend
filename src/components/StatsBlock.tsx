@@ -69,7 +69,7 @@ export default function StatsBlock({ title, firstStats, secondStats }: Props) {
 
                                 return (
                                     <div key={field.key} className="flex items-center justify-between gap-2">
-                                        <span className="font-medium uppercase tracking-wide text-gray-400 text-[11px] sm:text-xs">
+                                        <span className="font-medium uppercase tracking-wide text-white text-[11px] sm:text-xs">
                                             {field.label}
                                         </span>
                                         <span
@@ -92,7 +92,7 @@ export default function StatsBlock({ title, firstStats, secondStats }: Props) {
             </div>
 
             {/* minutes / minutes-per-goal / minutes-per-contribution */}
-            <div className="divide-y divide-gray-100 border-t mt-3">
+            <div className="divide-y divide-white border-t mt-3">
                 {DETAIL_STATS.map(field => {
                     const firstValue = firstStats[field.key];
                     const secondValue = secondStats[field.key];
@@ -111,7 +111,7 @@ export default function StatsBlock({ title, firstStats, secondStats }: Props) {
                                 >
                                     {formatValue(firstValue)}
                                 </span>
-                                <span className="font-semibold uppercase tracking-wide text-gray-400 text-xs sm:text-sm">
+                                <span className="font-semibold uppercase tracking-wide text-white text-xs sm:text-sm">
                                     {field.label}
                                 </span>
                                 <span className="text-left font-semibold w-16 text-base sm:w-24 sm:text-lg"
@@ -122,7 +122,7 @@ export default function StatsBlock({ title, firstStats, secondStats }: Props) {
                             </div>
 
                             {field.higherIsBetter && (
-                                <div className="flex overflow-hidden rounded-full bg-gray-100 mt-2 h-1.5">
+                                <div className="flex overflow-hidden rounded-full bg-white mt-2 h-1.5">
                                     <div className="transition-all duration-500"
                                          style={{ width: `${firstShare}%`, backgroundColor: MBAPPE_COLOR }} />
                                     <div className="bg-gray-300 transition-all duration-500"
