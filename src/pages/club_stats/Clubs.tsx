@@ -35,17 +35,17 @@ function ClubPanel({playerName, color, clubs,}: { playerName: string; color: str
 
     return (
         <div
-            className="rounded-2xl border border-gray-100 bg-black shadow-lg shadow-gray-900/5"
+            className="rounded-2xl border border-white bg-black shadow-lg shadow-gray-900/5"
             style={{ borderTop: `4px solid ${color}` }}
         >
             {/* Header */}
-            <div className="border-b border-gray-100 p-6 text-center">
+            <div className="border-b border-white p-6 text-center">
                 <h2 className="text-xl font-bold" style={{ color }}>{playerName}</h2>
-                <p className="mt-1 text-sm text-gray-400">{selectedClub}</p>
+                <p className="mt-1 text-sm text-white">{selectedClub}</p>
             </div>
 
             {/* Club selector */}
-            <div className="flex flex-wrap justify-center gap-2 border-b border-gray-100 p-4">
+            <div className="flex flex-wrap justify-center gap-2 border-b border-white p-4">
                 {clubNames.map((club) => {
                     const active = club === selectedClub;
 
@@ -66,9 +66,9 @@ function ClubPanel({playerName, color, clubs,}: { playerName: string; color: str
             <div className="grid grid-cols-3 gap-3 bg-gray-50/60 p-4 sm:gap-4 sm:p-6">
                 {QUICK_FIELDS.map((field) => (
                     <div key={field.key}
-                        className="rounded-xl bg-white p-3 text-center shadow-sm ring-1 ring-gray-900/5"
+                        className="rounded-xl bg-black p-3 text-center shadow-sm ring-1 ring-gray-900/5"
                     >
-                        <p className="text-[11px] font-semibold uppercase tracking-wide text-gray-400">
+                        <p className="text-[11px] font-semibold uppercase tracking-wide text-white">
                             {field.label}
                         </p>
 
@@ -80,11 +80,11 @@ function ClubPanel({playerName, color, clubs,}: { playerName: string; color: str
             <div className="divide-y divide-gray-100 border-t">
                 {DETAIL_FIELDS.map((field) => (
                     <div key={field.key} className="flex items-center justify-between px-6 py-3">
-                        <span className="text-xs font-semibold uppercase tracking-wide text-gray-400">
+                        <span className="text-xs font-semibold uppercase tracking-wide text-white">
                             {field.label}
                         </span>
 
-                        <span className="text-base font-bold text-gray-400">{formatValue(clubData.overall[field.key])}</span>
+                        <span className="text-base font-bold text-white">{formatValue(clubData.overall[field.key])}</span>
                     </div>
                 ))}
             </div>
@@ -101,7 +101,7 @@ function ClubPanel({playerName, color, clubs,}: { playerName: string; color: str
                                         ` - ${Object.keys(tier.competitions)[0]}`}
                                 </h3>
 
-                                <div className="mt-2 text-sm text-gray-400">
+                                <div className="mt-2 text-sm text-white">
                                     {formatValue(tier.overall.apps)} apps ·{" "}
                                     {formatValue(tier.overall.goals)} goals ·{" "}
                                     {formatValue(tier.overall.assists)} assists
@@ -110,12 +110,12 @@ function ClubPanel({playerName, color, clubs,}: { playerName: string; color: str
 
                             {/* Competitions */}
                             {Object.entries(tier.competitions).length > 1 &&
-                                <div className="divide-y divide-gray-100">
+                                <div className="divide-y divide-white">
                                     {Object.entries(tier.competitions).map(([competition, stats]) => (
                                         <div key={competition} className="flex items-center justify-between px-4 py-3">
-                                            <span className="text-sm text-gray-300">{competition}</span>
+                                            <span className="text-sm text-white">{competition}</span>
 
-                                            <span className="text-xs text-gray-400">
+                                            <span className="text-xs text-white">
                                                 {formatValue(stats.apps)} apps ·{" "}
                                                 {formatValue(stats.goals)} G ·{" "}
                                                 {formatValue(stats.assists)} A

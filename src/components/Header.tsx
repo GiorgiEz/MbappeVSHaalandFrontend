@@ -1,18 +1,19 @@
 import { NavLink } from "react-router-dom";
 import { STATS_MENU } from "../utils/statsMenu.ts";
+import Menu from "../components/Menu.tsx";
 
 
 export default function Header() {
     return (
-        <header className="sticky top-0 z-50 bg-black backdrop-blur-sm border-b">
-            <div className="relative flex items-center p-3">
-                <NavLink to="/" className="absolute left-4 flex items-center gap-2 sm:left-6">
+        <header className="sticky top-0 z-50 bg-black backdrop-blur-sm border-b h-18">
+            <div className="relative flex items-center justify-between">
+                <NavLink to="/" className="absolute left-4 flex items-center gap-2">
                     <img src="/photos/mbappe-vs-haaland-logo.png"
                         alt="Mbappé vs Haaland" className="h-14 w-32 object-cover"
                     />
                 </NavLink>
 
-                <nav className="flex justify-center gap-2 w-full">
+                <nav className="hidden min-[900px]:flex justify-center gap-2 flex-1">
                     {STATS_MENU.map(menu => (
                         <div key={menu.title} className="relative group">
                             <button
@@ -66,6 +67,9 @@ export default function Header() {
                         </div>
                     ))}
                 </nav>
+                <div className="ml-auto">
+                    <Menu />
+                </div>
             </div>
         </header>
     );

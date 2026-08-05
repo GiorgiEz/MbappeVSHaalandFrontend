@@ -28,7 +28,7 @@ export default function StatsComparisonTable({title, firstPlayer, secondPlayer}:
     const tierNames = mergeKeys(first.competition_tiers, second.competition_tiers);
 
     return (
-        <div className="bg-gray-800 shadow-lg w-3/5 mx-auto">
+        <div className="mx-auto w-[95%] min-[900px]:w-3/5 bg-gray-800 shadow-lg">
 
             {/* ===== Overall — space after it, before the tiers start ===== */}
             <div className="mb-8 border-4 border-white">

@@ -4,6 +4,7 @@ import { JSON_URLS } from "../../api/jsonUrls.ts";
 import {MBAPPE_COLOR, HAALAND_COLOR, MBAPPE_NAME, HAALAND_NAME} from "../../utils/Constants.ts";
 import PlayerComparisonGate from "../../components/PlayerComparisonGate.tsx";
 import Title from "../../components/Title.tsx";
+import {capitalize} from "../../utils/helper_functions.ts";
 
 
 type PlayerType = {
@@ -28,7 +29,7 @@ function OpponentColumn({name, color, opponents}: PlayerType) {
             {/* Opponents */}
             <div className="divide-y divide-gray-100">
                 {opponents.map((opponent, index) => {
-                    const rankColor = RANK_COLORS[index] ?? "#E5E7EB";
+                    const rankColor = RANK_COLORS[index] ?? "#FFFFFF";
                     const barWidth = maxGoals > 0 ? (opponent.goals / maxGoals) * 100 : 0;
 
                     return (
@@ -41,11 +42,11 @@ function OpponentColumn({name, color, opponents}: PlayerType) {
 
                             <div className="min-w-0 flex-1">
                                 <div className="flex justify-between gap-2">
-                                    <span className="truncate text-sm font-semibold text-gray-400">
+                                    <span className="truncate text-sm font-semibold text-white">
                                         {opponent.opponent}
                                     </span>
 
-                                    <div className="shrink-0 text-xs text-gray-400">
+                                    <div className="shrink-0 text-xs text-white">
                                         <span className="mr-2">{opponent.apps} apps </span>
                                         <span>{opponent.assists} assists </span>
                                     </div>
@@ -84,7 +85,7 @@ function OpponentPanel({firstPlayer, secondPlayer, category}: {firstPlayer: Play
 
     return (
         <div className=" rounded-2xl border border-gray-100 bg-black shadow-lg shadow-gray-900/5">
-            <Title title={category}/>
+            <Title title={capitalize(category)}/>
             <div className="grid grid-cols-1 md:grid-cols-2">
                 <OpponentColumn name={firstPlayer.name} color={firstPlayer.color} opponents={firstOpponents}/>
                 <OpponentColumn name={secondPlayer.name} color={secondPlayer.color} opponents={secondOpponents}/>
@@ -117,7 +118,7 @@ export default function FavouriteOpponent() {
                                             : {backgroundColor: "#1f1f1f", color: "#9ca3af"}
                                     }
                                 >
-                                    {category}
+                                    {capitalize(category)}
                                 </button>
                             );
                         })}

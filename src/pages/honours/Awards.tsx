@@ -16,9 +16,7 @@ function formatEntry(entry: EntryType): string {
 /** Distinguishes team_trophies' overall (club/international split)
  * from individual_awards' overall (flat breakdown) so both render
  * through the same pill list. */
-function isClubInternationalOverall(
-    overall: OverallType
-): overall is ClubInternationalOverallType {
+function isClubInternationalOverall(overall: OverallType): overall is ClubInternationalOverallType {
     return "club" in overall;
 }
 
@@ -45,13 +43,11 @@ export default function Awards({title, trophies1, trophies2}: {title: string; tr
                     const categories = getOverallCategories(overall);
 
                     return (
-                        <div
-                            key={player.playerName}
+                        <div key={player.playerName}
                             className="rounded-2xl border border-gray-100 bg-black shadow-lg shadow-gray-900/5"
                             style={{borderTop: `4px solid ${player.color}`}}
                         >
-                            <h2
-                                className="border-b border-gray-100 p-6 text-center text-xl font-bold"
+                            <h2 className="border-b border-gray-100 p-6 text-center text-xl font-bold"
                                 style={{color: player.color}}
                             >
                                 {player.playerName}
@@ -60,7 +56,7 @@ export default function Awards({title, trophies1, trophies2}: {title: string; tr
                             {/* ===== Overall breakdown ===== */}
                             <div className="border-b border-gray-100 p-5">
                                 <div className="mb-3 flex items-center justify-between">
-                                    <span className="text-sm font-semibold uppercase tracking-wide text-gray-400">
+                                    <span className="text-sm font-semibold uppercase tracking-wide" style={{color: player.color}}>
                                         Overall
                                     </span>
                                     <span
@@ -76,15 +72,13 @@ export default function Awards({title, trophies1, trophies2}: {title: string; tr
 
                                 <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
                                     {categories.map((cat) => (
-                                        <div
-                                            key={cat.category}
-                                            className="rounded-xl p-3 text-center"
+                                        <div key={cat.category} className="rounded-xl p-3 text-center"
                                             style={{backgroundColor: hexToRgba(player.color, 0.08)}}
                                         >
                                             <div className="text-lg font-bold" style={{color: player.color}}>
                                                 {cat.count}
                                             </div>
-                                            <div className="text-xs text-gray-400">{cat.category}</div>
+                                            <div className="text-xs text-white">{cat.category}</div>
                                         </div>
                                     ))}
                                 </div>
@@ -95,7 +89,7 @@ export default function Awards({title, trophies1, trophies2}: {title: string; tr
                                 {breakdown.map((trophy) => (
                                     <div key={`${player.playerName}-${trophy.title}`} className="p-4 sm:p-5">
                                         <div className="flex items-center justify-between gap-3">
-                                            <span className="font-semibold text-gray-400">{trophy.title}</span>
+                                            <span className="font-semibold" style={{color: player.color}}>{trophy.title}</span>
 
                                             <span
                                                 className="shrink-0 rounded-full px-2.5 py-0.5 text-xs font-bold"
@@ -110,7 +104,7 @@ export default function Awards({title, trophies1, trophies2}: {title: string; tr
 
                                         <ul className="mt-2 space-y-1">
                                             {trophy.entries.map((entry, index) => (
-                                                    <li key={index} className="text-sm text-gray-500">
+                                                    <li key={index} className="text-sm text-white">
                                                         {formatEntry(entry)}
                                                     </li>
                                                 )
