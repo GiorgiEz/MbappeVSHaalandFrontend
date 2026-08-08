@@ -1,6 +1,6 @@
-import type {GeneralStatsType, OverallCompetitionTiersType} from "./Types.ts";
+import type {GeneralStatsType, OverallCompetitionTiersType, DetailedStatsType} from "./Types.ts";
 
-export const EMPTY_DETAILS_SECTION = {
+export const EMPTY_DETAILS_SECTION: DetailedStatsType = {
     scoring: {
         goals_per_game: 0,
         hat_tricks: 0,
@@ -8,14 +8,14 @@ export const EMPTY_DETAILS_SECTION = {
     appearances: {
         games_started: {
             count: 0,
-            total: 0,
-            starting_percentage: "-"
+            total: 0
         },
+        starting_percentage: 0,
         captain: {
             count: 0,
             total: 0,
-            captain_percentage: "-"
         },
+        captain_percentage: 0
     },
     penalties: {
         scored: 0,

@@ -134,7 +134,7 @@ export default function StatsBlock({ title, firstStats, secondStats }: Props) {
                     );
                 })}
             </div>
-            <DetailedStats firstPlayer={firstStats.details} secondPlayer={secondStats.details}/>
+            <DetailedStats player1={firstStats.details} player2={secondStats.details}/>
         </div>
     );
 }

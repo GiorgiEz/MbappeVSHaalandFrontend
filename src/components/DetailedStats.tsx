@@ -1,99 +1,73 @@
-import { useEffect, useState } from "react";
-
-import type { DetailedStatsType, CountTotalType} from "../utils/Types";
-import { MBAPPE_COLOR, HAALAND_COLOR } from "../utils/Constants";
-
-interface Props {
-    firstPlayer: DetailedStatsType;
-    secondPlayer: DetailedStatsType;
-    firstName?: string;
-    secondName?: string;
-}
-
-type SectionConfig = {
-    [K in keyof DetailedStatsType]: {
-        key: K;
-        title: string;
-        fields: SectionField<K>[];
-    }
-}[keyof DetailedStatsType];
+import { useState } from "react";
+import type { DetailedStatsType, DetailedStatsSectionFieldType, DetailedStatsSection} from "../utils/Types";
+import {MBAPPE_COLOR, HAALAND_COLOR, MBAPPE_NAME, HAALAND_NAME, TITLE_COLOR} from "../utils/Constants";
 
 
-type SectionField<T extends keyof DetailedStatsType> = {
-    key: keyof DetailedStatsType[T];
-    label: string;
-};
-
-const SECTIONS: SectionConfig[] = [
+/** SECTIONS should match the exact structure as it is provided in JSON file */
+const SECTIONS: DetailedStatsSection[] = [
     {
-        key: "scoring",
         title: "Scoring",
         fields: [
-            { key: "goals_per_game", label: "Goals / Game" },
-            { key: "hat_tricks", label: "Hat-tricks" },
+            { label: "Goals / Game", getValue: (s) => s.scoring.goals_per_game },
+            { label: "Hat-tricks", getValue: (s) => s.scoring.hat_tricks },
         ],
     },
     {
-        key: "appearances",
         title: "Appearances",
         fields: [
-            { key: "games_started", label: "Games Started" },
-            { key: "starting_percentage", label: "Starting %" },
-            { key: "captain", label: "Captain" },
-            { key: "captain_percentage", label: "Captain %" },
+            { label: "Games Started", getValue: (s) => s.appearances.games_started },
+            { label: "Starting %", getValue: (s) => s.appearances.starting_percentage },
+            { label: "Captain", getValue: (s) => s.appearances.captain },
+            { label: "Captain %", getValue: (s) => s.appearances.captain_percentage },
         ],
     },
     {
-        key: "penalties",
         title: "Penalties",
         fields: [
-            { key: "scored", label: "Scored" },
-            { key: "attempted", label: "Attempted" },
-            { key: "conversion_percentage", label: "Conversion %" },
-            { key: "won", label: "Won" },
+            { label: "Scored", getValue: (s) => s.penalties.scored },
+            { label: "Attempted", getValue: (s) => s.penalties.attempted },
+            { label: "Conversion %", getValue: (s) => s.penalties.conversion_percentage },
+            { label: "Won", getValue: (s) => s.penalties.won },
         ],
     },
     {
-        key: "shooting",
         title: "Shooting",
         fields: [
-            { key: "shots", label: "Shots" },
-            { key: "shots_on_target", label: "Shots on Target" },
-            { key: "shots_on_target_percentage", label: "On Target %" },
+            { label: "Shots", getValue: (s) => s.shooting.shots },
+            { label: "Shots on Target", getValue: (s) => s.shooting.shots_on_target },
+            { label: "On Target %", getValue: (s) => s.shooting.shots_on_target_percentage },
         ],
     },
     {
-        key: "discipline",
         title: "Discipline",
         fields: [
-            { key: "yellow_cards", label: "Yellow Cards" },
-            { key: "red_cards", label: "Red Cards" },
+            { label: "Yellow Cards", getValue: (s) => s.discipline.yellow_cards },
+            { label: "Red Cards", getValue: (s) => s.discipline.red_cards },
         ],
     },
     {
-        key: "general",
         title: "General",
         fields: [
-            { key: "fouls_committed", label: "Fouls Committed" },
-            { key: "fouls_drawn", label: "Fouls Drawn" },
-            { key: "offsides", label: "Offsides" },
-            { key: "crosses", label: "Crosses" },
+            { label: "Fouls Committed", getValue: (s) => s.general.fouls_committed },
+            { label: "Fouls Drawn", getValue: (s) => s.general.fouls_drawn },
+            { label: "Offsides", getValue: (s) => s.general.offsides },
+            { label: "Crosses", getValue: (s) => s.general.crosses },
         ],
     },
     {
-        key: "defending",
         title: "Defending",
         fields: [
-            { key: "tackles_won", label: "Tackles Won" },
-            { key: "interceptions", label: "Interceptions" },
+            { label: "Tackles Won", getValue: (s) => s.defending.tackles_won },
+            { label: "Interceptions", getValue: (s) => s.defending.interceptions },
         ],
     },
 ];
 
-export default function DetailedStats({firstPlayer, secondPlayer, firstName = "Mbappé", secondName = "Haaland"}: Props) {
+
+export default function DetailedStats({player1, player2}: {player1: DetailedStatsType; player2: DetailedStatsType}) {
     const [open, setOpen] = useState(false);
 
-    const renderValue = (value: string | CountTotalType) => {
+    function renderValue (value: DetailedStatsSectionFieldType) {
         if (value == null) return "-";
 
         if (typeof value === "object" && "count" in value && "total" in value) {
@@ -101,26 +75,14 @@ export default function DetailedStats({firstPlayer, secondPlayer, firstName = "M
         }
 
         return value;
-    };
-
-    useEffect(() => {
-        if (open) {
-            document.body.style.overflow = "hidden";
-        } else {
-            document.body.style.overflow = "";
-        }
-
-        return () => {
-            document.body.style.overflow = "";
-        };
-    }, [open]);
+    }
 
     return (
         <div className={"flex justify-center"}>
-            <button onClick={() => setOpen(true)}
-                className="mt-3 mb-2 rounded-xl border border-gray-600 bg-gray-800 px-5 py-3 font-semibold text-white transition hover:bg-gray-700"
+            <button onClick={() => setOpen(true)} className="mt-3 mb-2 rounded-xl border px-5 py-3
+            font-bold transition hover:scale-105 cursor-pointer" style={{color: TITLE_COLOR}}
             >
-                Show Detailed Statistics
+                Detailed Stats
             </button>
 
             {open && (
@@ -133,7 +95,7 @@ export default function DetailedStats({firstPlayer, secondPlayer, firstName = "M
                         {/* Close Button */}
                         <button onClick={() => setOpen(false)}
                             className="absolute right-5 top-5 flex h-6 w-8 items-center justify-center rounded-full
-                            bg-gray-900 text-6xl text-gray-300 transition hover:text-white"
+                            bg-gray-900 text-6xl text-gray-300 transition hover:text-white cursor-pointer"
                         >
                             ×
                         </button>
@@ -142,33 +104,30 @@ export default function DetailedStats({firstPlayer, secondPlayer, firstName = "M
 
                         <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
                             {SECTIONS.map((section) => {
-                                const firstSection = firstPlayer[section.key];
-                                const secondSection = secondPlayer[section.key];
-
                                 return (
                                     <div key={section.title} className="rounded-xl border border-gray-700">
                                         <h3 className="border-b border-gray-700 py-3 text-center text-xl font-bold text-white">
                                             {section.title}
                                         </h3>
 
-                                        <div className="grid grid-cols-3 border-b border-gray-700 py-2 text-center text-sm font-semibold">
-                                            <div style={{ color: MBAPPE_COLOR }}>{firstName}</div>
+                                        <div className="grid grid-cols-3 border-b border-gray-700 py-2 text-center text-xl font-semibold">
+                                            <div style={{ color: MBAPPE_COLOR }}>{MBAPPE_NAME}</div>
                                             <div className="text-gray-300">Statistic</div>
-                                            <div style={{ color: HAALAND_COLOR }}>{secondName}</div>
+                                            <div style={{ color: HAALAND_COLOR }}>{HAALAND_NAME}</div>
                                         </div>
 
                                         {section.fields.map((field) => (
-                                            <div key={field.key} className="grid grid-cols-3 border-b border-gray-800
-                                                px-4 py-3 text-center last:border-none"
+                                            <div key={field.label} className="grid grid-cols-3 border-b border-gray-800
+                                                px-4 py-3 text-center last:border-none text-ms"
                                             >
                                                 <div className="font-semibold" style={{ color: MBAPPE_COLOR }}>
-                                                    {renderValue(firstSection[field.key])}
+                                                    {renderValue(field.getValue(player1))}
                                                 </div>
 
                                                 <div className="text-gray-300">{field.label}</div>
 
                                                 <div className="font-semibold" style={{ color: HAALAND_COLOR }}>
-                                                    {renderValue(secondSection[field.key])}
+                                                    {renderValue(field.getValue(player2))}
                                                 </div>
                                             </div>
                                         ))}

@@ -188,3 +188,10 @@ export interface DetailedStatsType {
     general: DetailedStatsGeneralType;
     defending: DetailedStatsDefendingType;
 }
+
+export type DetailedStatsSectionFieldType = number | null | CountTotalType;
+
+export interface DetailedStatsSection {
+    title: string;
+    fields: {label: string, getValue: (stats: DetailedStatsType) => DetailedStatsSectionFieldType}[];
+}
