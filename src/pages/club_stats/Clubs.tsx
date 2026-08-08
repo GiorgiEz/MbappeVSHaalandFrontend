@@ -7,20 +7,20 @@ import PlayerComparisonGate from "../../components/PlayerComparisonGate.tsx";
 import Title from "../../components/Title.tsx";
 
 
-const QUICK_FIELDS: { key: keyof GeneralStatsType; label: string }[] = [
+const QUICK_FIELDS: { key: Exclude<keyof GeneralStatsType, "details">; label: string }[] = [
     { key: "apps", label: "Appearances" },
     { key: "goals", label: "Goals" },
     { key: "assists", label: "Assists" },
 ];
 
-const DETAIL_FIELDS: { key: keyof GeneralStatsType; label: string }[] = [
+const DETAIL_FIELDS: { key: Exclude<keyof GeneralStatsType, "details">; label: string }[] = [
     { key: "minutes", label: "Minutes" },
     { key: "minutes_per_goal", label: "Minutes / Goal" },
     { key: "minutes_per_goal_contribution", label: "Minutes / Contribution" },
 ];
 
 
-function ClubPanel({playerName, color, clubs,}: { playerName: string; color: string; clubs: ClubsType; }) {
+function ClubPanel({playerName, color, clubs}: { playerName: string; color: string; clubs: ClubsType }) {
     const clubNames = Object.keys(clubs);
     const [selectedClub, setSelectedClub] = useState(clubNames[2] ?? clubNames[0]);
     const clubData = clubs[selectedClub];
@@ -34,8 +34,7 @@ function ClubPanel({playerName, color, clubs,}: { playerName: string; color: str
     }
 
     return (
-        <div
-            className="rounded-2xl border border-white bg-black shadow-lg shadow-gray-900/5"
+        <div className="rounded-2xl border border-white bg-black shadow-lg shadow-gray-900/5"
             style={{ borderTop: `4px solid ${color}` }}
         >
             {/* Header */}
@@ -65,13 +64,8 @@ function ClubPanel({playerName, color, clubs,}: { playerName: string; color: str
             {/* Overall stats */}
             <div className="grid grid-cols-3 gap-3 bg-gray-50/60 p-4 sm:gap-4 sm:p-6">
                 {QUICK_FIELDS.map((field) => (
-                    <div key={field.key}
-                        className="rounded-xl bg-black p-3 text-center shadow-sm ring-1 ring-gray-900/5"
-                    >
-                        <p className="text-[11px] font-semibold uppercase tracking-wide text-white">
-                            {field.label}
-                        </p>
-
+                    <div key={field.key} className="rounded-xl bg-black p-3 text-center shadow-sm ring-1 ring-gray-900/5">
+                        <p className="text-[11px] font-semibold uppercase tracking-wide text-white">{field.label}</p>
                         <p className="mt-2 text-lg font-bold" style={{color}}>{formatValue(clubData.overall[field.key])}</p>
                     </div>
                 ))}
@@ -102,8 +96,8 @@ function ClubPanel({playerName, color, clubs,}: { playerName: string; color: str
                                 </h3>
 
                                 <div className="mt-2 text-sm text-white">
-                                    {formatValue(tier.overall.apps)} apps ·{" "}
-                                    {formatValue(tier.overall.goals)} goals ·{" "}
+                                    {formatValue(tier.overall.apps)} apps | {" "}
+                                    {formatValue(tier.overall.goals)} goals | {" "}
                                     {formatValue(tier.overall.assists)} assists
                                 </div>
                             </div>
@@ -116,8 +110,8 @@ function ClubPanel({playerName, color, clubs,}: { playerName: string; color: str
                                             <span className="text-sm text-white">{competition}</span>
 
                                             <span className="text-xs text-white">
-                                                {formatValue(stats.apps)} apps ·{" "}
-                                                {formatValue(stats.goals)} G ·{" "}
+                                                {formatValue(stats.apps)} apps | {" "}
+                                                {formatValue(stats.goals)} G | {" "}
                                                 {formatValue(stats.assists)} A
                                             </span>
                                         </div>

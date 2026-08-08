@@ -6,6 +6,7 @@ export interface GeneralStatsType {
     minutes: number;
     minutes_per_goal: number | null;
     minutes_per_goal_contribution: number | null;
+    details: DetailedStatsType;
 }
 
 export interface CompetitionType {
@@ -127,4 +128,70 @@ export interface HonourType {
 export interface Honours {
     team_trophies: HonourType;
     individual_awards: HonourType;
+}
+
+
+/* ===== DETAILED STATS ===== */
+export interface CountTotalType {
+    count: number;
+    total: number;
+}
+
+export interface DetailedStatsScoringType {
+    goals_per_game: number;
+    hat_tricks: number;
+}
+
+export interface DetailedStatsAppearancesType {
+    games_started: CountTotalType;
+    captain: CountTotalType;
+    starting_percentage: number;
+    captain_percentage: number;
+}
+
+export interface DetailedStatsPenaltiesType {
+    scored: number;
+    attempted: number;
+    conversion_percentage: number | null;
+    won: number;
+}
+
+export interface DetailedStatsShootingType {
+    shots: number;
+    shots_on_target: number;
+    shots_on_target_percentage: number | null;
+}
+
+export interface DetailedStatsDisciplineType {
+    yellow_cards: number;
+    red_cards: number;
+}
+
+export interface DetailedStatsGeneralType {
+    fouls_committed: number;
+    fouls_drawn: number;
+    offsides: number;
+    crosses: number;
+}
+
+export interface DetailedStatsDefendingType {
+    tackles_won: number;
+    interceptions: number;
+}
+
+export interface DetailedStatsType {
+    scoring: DetailedStatsScoringType;
+    appearances: DetailedStatsAppearancesType;
+    penalties: DetailedStatsPenaltiesType;
+    shooting: DetailedStatsShootingType;
+    discipline: DetailedStatsDisciplineType;
+    general: DetailedStatsGeneralType;
+    defending: DetailedStatsDefendingType;
+}
+
+export type DetailedStatsSectionFieldType = number | null | CountTotalType;
+
+export interface DetailedStatsSection {
+    title: string;
+    fields: {label: string, getValue: (stats: DetailedStatsType) => DetailedStatsSectionFieldType}[];
 }

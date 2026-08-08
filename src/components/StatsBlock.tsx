@@ -2,10 +2,11 @@ import type {GeneralStatsType} from "../utils/Types.ts";
 import {HAALAND_COLOR, HAALAND_NAME, MBAPPE_COLOR, MBAPPE_NAME, NOT_LEADING_COLOR} from "../utils/Constants.ts";
 import {formatValue, hexToRgba} from "../utils/helper_functions.ts";
 import Title from "./Title.tsx";
+import DetailedStats from "./DetailedStats.tsx";
 
 
 interface StatField {
-    key: keyof GeneralStatsType;
+    key: Exclude<keyof GeneralStatsType, "details">
     label: string;
     higherIsBetter: boolean;
 }
@@ -133,6 +134,7 @@ export default function StatsBlock({ title, firstStats, secondStats }: Props) {
                     );
                 })}
             </div>
+            <DetailedStats player1={firstStats.details} player2={secondStats.details}/>
         </div>
     );
 }
