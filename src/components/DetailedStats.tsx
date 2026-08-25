@@ -64,8 +64,28 @@ const SECTIONS: DetailedStatsSection[] = [
 ];
 
 
-export default function DetailedStats({player1, player2}: {player1: DetailedStatsType; player2: DetailedStatsType}) {
+export default function DetailedStats({
+                                          player1,
+                                          player2,
+                                          player1Name = MBAPPE_NAME,
+                                          player1Color = MBAPPE_COLOR,
+                                          player2Name = HAALAND_NAME,
+                                          player2Color = HAALAND_COLOR,
+                                          buttonLabel = "Detailed Stats",
+                                          compact = false,
+                                      }: {
+    player1: DetailedStatsType;
+    player2?: DetailedStatsType | null;
+    player1Name?: string;
+    player1Color?: string;
+    player2Name?: string;
+    player2Color?: string;
+    buttonLabel?: string;
+    compact?: boolean;
+}) {
     const [open, setOpen] = useState(false);
+    const hasPlayer2 = player2 != null;
+    const gridColsClass = hasPlayer2 ? "grid-cols-3" : "grid-cols-2";
 
     function renderValue (value: DetailedStatsSectionFieldType) {
         if (value == null) return "-";
@@ -79,22 +99,27 @@ export default function DetailedStats({player1, player2}: {player1: DetailedStat
 
     return (
         <div className={"flex justify-center"}>
-            <button onClick={() => setOpen(true)} className="mt-3 mb-2 rounded-xl border px-5 py-3
-            font-bold transition hover:scale-105 cursor-pointer" style={{color: TITLE_COLOR}}
+            <button onClick={() => setOpen(true)}
+                    className={
+                        compact
+                            ? "rounded-lg border px-3 py-1 text-xs font-semibold transition hover:scale-105 cursor-pointer"
+                            : "mt-3 mb-2 rounded-xl border px-5 py-3 font-bold transition hover:scale-105 cursor-pointer"
+                    }
+                    style={{color: TITLE_COLOR}}
             >
-                Detailed Stats
+                {buttonLabel}
             </button>
 
             {open && (
                 <div className="fixed inset-0 z-999 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4"
-                    onClick={() => setOpen(false)}
+                     onClick={() => setOpen(false)}
                 >
                     <div onClick={(e) => e.stopPropagation()}
-                        className="relative max-h-[90vh] w-full max-w-7xl overflow-y-auto rounded-2xl bg-gray-900 p-8 shadow-2xl"
+                         className="relative max-h-[90vh] w-full max-w-7xl overflow-y-auto rounded-2xl bg-gray-900 p-8 shadow-2xl"
                     >
                         {/* Close Button */}
                         <button onClick={() => setOpen(false)}
-                            className="absolute right-5 top-5 flex h-6 w-8 items-center justify-center rounded-full
+                                className="absolute right-5 top-5 flex h-6 w-8 items-center justify-center rounded-full
                             bg-gray-900 text-6xl text-gray-300 transition hover:text-white cursor-pointer"
                         >
                             ×
@@ -110,25 +135,27 @@ export default function DetailedStats({player1, player2}: {player1: DetailedStat
                                             {section.title}
                                         </h3>
 
-                                        <div className="grid grid-cols-3 border-b border-gray-700 py-2 text-center text-xl font-semibold">
-                                            <div style={{ color: MBAPPE_COLOR }}>{MBAPPE_NAME}</div>
+                                        <div className={`grid ${gridColsClass} border-b border-gray-700 py-2 text-center text-xl font-semibold`}>
+                                            <div style={{ color: player1Color }}>{player1Name}</div>
                                             <div className="text-gray-300">Statistic</div>
-                                            <div style={{ color: HAALAND_COLOR }}>{HAALAND_NAME}</div>
+                                            {hasPlayer2 && <div style={{ color: player2Color }}>{player2Name}</div>}
                                         </div>
 
                                         {section.fields.map((field) => (
-                                            <div key={field.label} className="grid grid-cols-3 border-b border-gray-800
-                                                px-4 py-3 text-center last:border-none text-ms"
+                                            <div key={field.label} className={`grid ${gridColsClass} border-b border-gray-800
+                                                px-4 py-3 text-center last:border-none text-ms`}
                                             >
-                                                <div className="font-semibold" style={{ color: MBAPPE_COLOR }}>
+                                                <div className="font-semibold" style={{ color: player1Color }}>
                                                     {renderValue(field.getValue(player1))}
                                                 </div>
 
                                                 <div className="text-gray-300">{field.label}</div>
 
-                                                <div className="font-semibold" style={{ color: HAALAND_COLOR }}>
-                                                    {renderValue(field.getValue(player2))}
-                                                </div>
+                                                {hasPlayer2 && (
+                                                    <div className="font-semibold" style={{ color: player2Color }}>
+                                                        {renderValue(field.getValue(player2!))}
+                                                    </div>
+                                                )}
                                             </div>
                                         ))}
                                     </div>
