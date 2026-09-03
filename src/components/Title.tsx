@@ -1,5 +1,3 @@
-import { TITLE_COLOR } from "../utils/Constants.ts";
-
 interface Props {
     title: string;
     text_size?: "sm" | "base" | "lg" | "xl" | "2xl" | "3xl" | "4xl";
@@ -15,6 +13,7 @@ const TEXT_SIZE_MAP = {
     "4xl": "text-4xl",
 };
 
+
 export default function Title({ title, text_size = "4xl" }: Props) {
     const parts = title.split("-").map(part => part.trim());
     const hasSeparator = parts.length === 2;
@@ -22,15 +21,33 @@ export default function Title({ title, text_size = "4xl" }: Props) {
     return (
         <h1
             className={`p-4 text-center ${TEXT_SIZE_MAP[text_size]} font-bold tracking-tight`}
-            style={{ color: TITLE_COLOR }}
         >
             {hasSeparator ? (
                 <>
-                    <div>{parts[0]}</div>
-                    <div className="text-lg font-medium">{parts[1]}</div>
+                    <div
+                        className="bg-gradient-to-r from-[#B8860B] via-[#FFF1A8] to-[#D4AF37] bg-clip-text text-transparent"
+                        style={{
+                            textShadow:
+                                "0 0 8px rgba(246, 211, 101, 0.35), 0 0 20px rgba(212, 175, 55, 0.2)",
+                        }}
+                    >
+                        {parts[0]}
+                    </div>
+
+                    <div className="text-lg font-medium text-gray-300">
+                        {parts[1]}
+                    </div>
                 </>
             ) : (
-                title
+                <span
+                    className="bg-gradient-to-r from-[#B8860B] via-[#FFF1A8] to-[#D4AF37] bg-clip-text text-transparent"
+                    style={{
+                        textShadow:
+                            "0 0 8px rgba(246, 211, 101, 0.35), 0 0 20px rgba(212, 175, 55, 0.2)",
+                    }}
+                >
+                    {title}
+                </span>
             )}
         </h1>
     );
