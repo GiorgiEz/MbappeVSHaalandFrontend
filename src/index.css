@@ -1,1 +1,8 @@
 @import "tailwindcss";
+
+@layer components {
+    .text-gold-glow {
+        @apply bg-gradient-to-r from-[#B8860B] via-[#FFF1A8] to-[#D4AF37] bg-clip-text text-transparent;
+        text-shadow: 0 0 8px rgba(246, 211, 101, 0.35), 0 0 20px rgba(212, 175, 55, 0.2);
+    }
+}

@@ -62,7 +62,6 @@ export const EMPTY_OVERALL_COMPETITION_TIERS: OverallCompetitionTiersType = {
 export const MBAPPE_NAME = "Kylian Mbappe";
 export const HAALAND_NAME = "Erling Haaland";
 
-export const MBAPPE_COLOR = "#1D4ED8"; // royal blue — France & Real Madrid
+export const MBAPPE_COLOR = "#13afec"; // royal blue — France & Real Madrid
 export const HAALAND_COLOR = "#D97706"; // amber/gold — his Dortmund breakout years
 export const NOT_LEADING_COLOR = "#ffffff"; // gray
-export const TITLE_COLOR = "#e6c4da";

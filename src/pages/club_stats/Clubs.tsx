@@ -5,6 +5,7 @@ import {MBAPPE_COLOR, HAALAND_COLOR, MBAPPE_NAME, HAALAND_NAME} from "../../util
 import { formatValue, hexToRgba } from "../../utils/helper_functions.ts";
 import PlayerComparisonGate from "../../components/PlayerComparisonGate.tsx";
 import Title from "../../components/Title.tsx";
+import DetailedStats from "../../components/DetailedStats.tsx";
 
 
 const QUICK_FIELDS: { key: Exclude<keyof GeneralStatsType, "details">; label: string }[] = [
@@ -35,7 +36,7 @@ function ClubPanel({playerName, color, clubs}: { playerName: string; color: stri
 
     return (
         <div className="rounded-2xl border border-white bg-black shadow-lg shadow-gray-900/5"
-            style={{ borderTop: `4px solid ${color}` }}
+             style={{ borderTop: `4px solid ${color}` }}
         >
             {/* Header */}
             <div className="border-b border-white p-6 text-center">
@@ -50,10 +51,10 @@ function ClubPanel({playerName, color, clubs}: { playerName: string; color: stri
 
                     return (
                         <button key={club} onClick={() => setSelectedClub(club)}
-                            className="rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors hover:cursor-pointer"
-                            style={active ? {backgroundColor: color, color: "#fff"} :
-                                {backgroundColor: hexToRgba(color, 0.08), color}
-                            }
+                                className="rounded-full px-3.5 py-1.5 text-sm font-semibold transition-colors hover:cursor-pointer"
+                                style={active ? {backgroundColor: color, color: "#fff"} :
+                                    {backgroundColor: hexToRgba(color, 0.08), color}
+                                }
                         >
                             {club}
                         </button>
@@ -83,6 +84,15 @@ function ClubPanel({playerName, color, clubs}: { playerName: string; color: stri
                 ))}
             </div>
 
+            {/* Overall details */}
+            <div className="border-t border-gray-100 py-4">
+                <DetailedStats
+                    player1={clubData.overall.details}
+                    player1Name={playerName}
+                    player1Color={color}
+                />
+            </div>
+
             {/* Competition tiers */}
             <div className="border-t border-gray-100 p-5 space-y-6">
                 {Object.entries(clubData.competition_tiers).map(
@@ -92,13 +102,23 @@ function ClubPanel({playerName, color, clubs}: { playerName: string; color: stri
                             <div className="px-4 py-3" style={{backgroundColor: hexToRgba(color, 0.08)}}>
                                 <h3 className="font-bold" style={{ color }}>
                                     {tierName}{Object.keys(tier.competitions).length === 1 &&
-                                        ` - ${Object.keys(tier.competitions)[0]}`}
+                                    ` - ${Object.keys(tier.competitions)[0]}`}
                                 </h3>
 
-                                <div className="mt-2 text-sm text-white">
-                                    {formatValue(tier.overall.apps)} apps | {" "}
-                                    {formatValue(tier.overall.goals)} goals | {" "}
-                                    {formatValue(tier.overall.assists)} assists
+                                <div className="mt-2 flex items-center justify-between">
+                                    <div className="text-sm text-white">
+                                        {formatValue(tier.overall.apps)} apps | {" "}
+                                        {formatValue(tier.overall.goals)} goals | {" "}
+                                        {formatValue(tier.overall.assists)} assists
+                                    </div>
+
+                                    <DetailedStats
+                                        player1={tier.overall.details}
+                                        player1Name={playerName}
+                                        player1Color={color}
+                                        buttonLabel="Details"
+                                        compact
+                                    />
                                 </div>
                             </div>
 
@@ -109,11 +129,21 @@ function ClubPanel({playerName, color, clubs}: { playerName: string; color: stri
                                         <div key={competition} className="flex items-center justify-between px-4 py-3">
                                             <span className="text-sm text-white">{competition}</span>
 
-                                            <span className="text-xs text-white">
-                                                {formatValue(stats.apps)} apps | {" "}
-                                                {formatValue(stats.goals)} G | {" "}
-                                                {formatValue(stats.assists)} A
-                                            </span>
+                                            <div className="flex items-center gap-3">
+                                                <span className="text-xs text-white">
+                                                    {formatValue(stats.apps)} apps | {" "}
+                                                    {formatValue(stats.goals)} G | {" "}
+                                                    {formatValue(stats.assists)} A
+                                                </span>
+
+                                                <DetailedStats
+                                                    player1={stats.details}
+                                                    player1Name={playerName}
+                                                    player1Color={color}
+                                                    buttonLabel="Details"
+                                                    compact
+                                                />
+                                            </div>
                                         </div>
                                     ))}
                                 </div>

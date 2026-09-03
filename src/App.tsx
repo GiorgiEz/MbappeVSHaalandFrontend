@@ -11,7 +11,7 @@ import {Honours} from "./pages/honours/Honours.tsx";
 export default function App() {
     return (
         <BrowserRouter>
-            <div className="relative z-10 bg-gray-800">
+            <div className="relative z-10 bg-black">
                 <Header />
 
                 <main className="max-w-7xl mx-auto px-6 py-8">
