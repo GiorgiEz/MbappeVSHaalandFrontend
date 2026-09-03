@@ -19,35 +19,14 @@ export default function Title({ title, text_size = "4xl" }: Props) {
     const hasSeparator = parts.length === 2;
 
     return (
-        <h1
-            className={`p-4 text-center ${TEXT_SIZE_MAP[text_size]} font-bold tracking-tight`}
-        >
+        <h1 className={`p-4 text-center ${TEXT_SIZE_MAP[text_size]} font-bold tracking-tight`}>
             {hasSeparator ? (
                 <>
-                    <div
-                        className="bg-gradient-to-r from-[#B8860B] via-[#FFF1A8] to-[#D4AF37] bg-clip-text text-transparent"
-                        style={{
-                            textShadow:
-                                "0 0 8px rgba(246, 211, 101, 0.35), 0 0 20px rgba(212, 175, 55, 0.2)",
-                        }}
-                    >
-                        {parts[0]}
-                    </div>
-
-                    <div className="text-lg font-medium text-gray-300">
-                        {parts[1]}
-                    </div>
+                    <div className="text-gold-glow">{parts[0]}</div>
+                    <div className="text-lg font-medium text-gray-300">{parts[1]}</div>
                 </>
             ) : (
-                <span
-                    className="bg-gradient-to-r from-[#B8860B] via-[#FFF1A8] to-[#D4AF37] bg-clip-text text-transparent"
-                    style={{
-                        textShadow:
-                            "0 0 8px rgba(246, 211, 101, 0.35), 0 0 20px rgba(212, 175, 55, 0.2)",
-                    }}
-                >
-                    {title}
-                </span>
+                <span className="text-gold-glow">{title}</span>
             )}
         </h1>
     );

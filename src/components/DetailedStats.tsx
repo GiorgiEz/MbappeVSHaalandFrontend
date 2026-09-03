@@ -88,10 +88,10 @@ export default function DetailedStats({player1, player2, player1Name = MBAPPE_NA
             <button onClick={() => setOpen(true)}
                     className={
                         compact
-                            ? "rounded-lg border px-3 py-1 text-xs font-semibold transition hover:scale-105 cursor-pointer"
+                            ? "rounded-lg border px-3 py-1 text-xs font-semibold transition hover:scale-105 cursor-pointer "
                             : "mt-3 mb-2 rounded-xl border px-5 py-3 font-bold transition hover:scale-105 cursor-pointer"
                     }
-                    style={{color: "#d5b252"}}
+                    style={{color: "#ffffff"}}
             >
                 {buttonLabel}
             </button>
